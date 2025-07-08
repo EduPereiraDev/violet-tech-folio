@@ -19,7 +19,7 @@ const Projects = () => {
       technologies: ["Next.js", "TypeScript", "Python", "Flask", "PostgreSQL"],
       category: "Full Stack",
       icon: Database,
-      github: "https://github.com/alest-github/Mestre.AI",
+      github: "https://github.com/EduPereiraDev/MestreAI",
       featured: true
     }
   ];
