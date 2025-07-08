@@ -26,10 +26,10 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 bg-gradient-dark">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 pb-2 leading-tight bg-gradient-primary bg-clip-text text-transparent">
               Portfólio de Projetos
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">

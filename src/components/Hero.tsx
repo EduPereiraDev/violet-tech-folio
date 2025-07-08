@@ -6,7 +6,7 @@ import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
 const Hero = () => {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
-    () => ["Full Stack", "Front Stack", "Back Stack", "AI Stack", "Web Stack"],
+    () => ["Full Stack", "Frontend", "Backend", "AI Stack", "Web Stack"],
     []
   );
 
@@ -27,7 +27,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative bg-gradient-dark">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative bg-gradient-dark pt-20">
       <div className="container mx-auto px-4 text-center animate-fade-in">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-2 bg-gradient-primary bg-clip-text text-transparent">

@@ -6,7 +6,7 @@ const About = () => {
     {
       icon: Code,
       title: "Desenvolvimento Full Stack",
-      description: "Experiência completa em front-end e back-end, criando aplicações robustas e escaláveis."
+      description: "Experiência completa em frontend e backend, criando aplicações robustas e escaláveis."
     },
     {
       icon: Database,

@@ -27,14 +27,14 @@ const AI = () => {
 
   return (
     <section id="ai" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 pb-2 leading-tight bg-gradient-primary bg-clip-text text-transparent">
               Inteligência Artificial
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Especialização em tecnologias de IA e machine learning, criando soluções inteligentes 
+              Especialização em tecnologias de IA e Machine Learning, criando soluções inteligentes 
               que transformam dados em valor e automatizam processos complexos.
             </p>
           </div>
