@@ -1,73 +1,126 @@
-# Welcome to your Lovable project
+# Violet Tech Portfolio
 
-## Project info
+## Sobre
 
-**URL**: https://lovable.dev/projects/d6dddfb6-67af-4be5-a34a-b883d590aec3
+Portfólio profissional do **Eduardo Pereira**, desenvolvedor Full Stack especializado em soluções digitais modernas, desenvolvimento web, inteligência artificial e experiência do usuário.
 
-## How can I edit this code?
+## Características
 
-There are several ways of editing your application.
+- **Design moderno** com tema dark e acentos roxos/violetas
+- **Animações fluidas** com Framer Motion
+- **Texto animado rotativo** na seção Hero
+- **Responsivo** para todos os dispositivos
+- **Performance otimizada** com Vite
+- **Tipagem completa** com TypeScript
+- **Componentes reutilizáveis** com shadcn/ui
 
-**Use Lovable**
+## Tecnologias
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d6dddfb6-67af-4be5-a34a-b883d590aec3) and start prompting.
+- **Frontend**: React 18, TypeScript, Vite
+- **UI Framework**: shadcn/ui (Radix UI + Tailwind CSS)
+- **Animações**: Framer Motion
+- **Ícones**: Lucide React
+- **Estilização**: Tailwind CSS
+- **Build**: Vite
+- **Lint**: ESLint
 
-Changes made via Lovable will be committed automatically to this repo.
+## Instalação e Uso
 
-**Use your preferred IDE**
+### Pré-requisitos
+- Node.js 18+ 
+- npm ou yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Instalação
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Clone o repositório
+git clone https://github.com/EduPereiraDev/violet-tech-folio.git
 
-Follow these steps:
+# Entre no diretório
+cd violet-tech-folio
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Instale as dependências
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Scripts Disponíveis
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Desenvolvimento
+npm run dev
 
-**Use GitHub Codespaces**
+# Build para produção
+npm run build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Preview da build
+npm run preview
 
-## What technologies are used for this project?
+# Lint
+npm run lint
+```
 
-This project is built with:
+## Estrutura do Projeto
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+src/
+├── components/          # Componentes React
+│   ├── Hero.tsx        # Seção principal com animação
+│   ├── About.tsx       # Sobre o desenvolvedor
+│   ├── Skills.tsx      # Habilidades técnicas
+│   ├── Projects.tsx    # Portfólio de projetos
+│   ├── Contact.tsx     # Formulário de contato
+│   └── ui/             # Componentes base shadcn/ui
+├── pages/              # Páginas da aplicação
+├── hooks/              # Custom hooks
+└── lib/                # Utilitários
+```
 
-## How can I deploy this project?
+## Seções do Portfolio
 
-Simply open [Lovable](https://lovable.dev/projects/d6dddfb6-67af-4be5-a34a-b883d590aec3) and click on Share -> Publish.
+1. **Hero** - Apresentação com texto animado rotativo
+2. **About** - Especialidades e habilidades
+3. **Skills** - Tecnologias com ícones
+4. **AI** - Seção dedicada à Inteligência Artificial
+5. **Projects** - Projetos em destaque
+6. **Contact** - Formulário funcional de contato
 
-## Can I connect a custom domain to my Lovable project?
+## Responsividade
 
-Yes, you can!
+- **Mobile First** - Design otimizado para dispositivos móveis
+- **Breakpoints** - sm, md, lg, xl, 2xl
+- **Layout flexível** - Adapta-se a qualquer tamanho de tela
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Funcionalidades Especiais
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Texto Animado no Hero
+- Rotação automática entre: Full Stack, Front Stack, Back Stack, AI Stack, Web Stack
+- Animação suave com Framer Motion
+- Interval de 2.5 segundos
+
+### Formulário de Contato
+- Validação de campos obrigatórios
+- Integração com cliente de email via mailto
+- Feedback visual com toast notifications
+
+### Skills com Ícones
+- Substituição de barras de progresso por ícones representativos
+- Organizadas por categorias
+- Efeitos hover interativos
+
+## Links Importantes
+
+- **Portfolio**: [Em breve]
+- **GitHub**: [@EduPereiraDev](https://github.com/EduPereiraDev)
+- **LinkedIn**: [Eduardo Pereira](https://www.linkedin.com/in/eduardo-pereira-dos-santos-035311320)
+- **Email**: pereirassantosedu@gmail.com
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+**Desenvolvido com 💜 por Eduardo Pereira**

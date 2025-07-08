@@ -1,47 +1,53 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { 
+  Code2, 
+  FileCode, 
+  Component, 
+  Container, 
+  GitBranch, 
+  Cloud, 
+  FileText, 
+  Palette,
+  Braces,
+  Database
+} from "lucide-react";
 
 const Skills = () => {
   const skills = [
     {
       category: "Linguagens de Programação",
       items: [
-        { name: "TypeScript", level: 95, color: "from-blue-500 to-blue-600" },
-        { name: "Python", level: 90, color: "from-yellow-500 to-yellow-600" },
-        { name: "JavaScript", level: 95, color: "from-yellow-400 to-yellow-500" },
-        { name: "C#", level: 85, color: "from-purple-500 to-purple-600" },
-        { name: ".NET", level: 85, color: "from-purple-600 to-blue-600" }
+        { name: "TypeScript", icon: Code2, color: "text-blue-500" },
+        { name: "Python", icon: FileCode, color: "text-yellow-500" },
+        { name: "JavaScript", icon: Braces, color: "text-yellow-400" },
+        { name: "C#", icon: Code2, color: "text-purple-500" },
+        { name: ".NET", icon: Database, color: "text-purple-600" }
       ]
     },
     {
       category: "Tecnologias & Ferramentas",
       items: [
-        { name: "React", level: 95, color: "from-cyan-400 to-cyan-500" },
-        { name: "Docker", level: 80, color: "from-blue-600 to-blue-700" },
-        { name: "Git", level: 90, color: "from-orange-500 to-red-500" },
-        { name: "GCP", level: 75, color: "from-green-500 to-blue-500" }
+        { name: "React", icon: Component, color: "text-cyan-400" },
+        { name: "Docker", icon: Container, color: "text-blue-600" },
+        { name: "Git", icon: GitBranch, color: "text-orange-500" },
+        { name: "GCP", icon: Cloud, color: "text-green-500" }
       ]
     },
     {
       category: "Tecnologias Web",
       items: [
-        { name: "HTML", level: 95, color: "from-orange-500 to-orange-600" },
-        { name: "CSS", level: 90, color: "from-blue-500 to-blue-600" }
+        { name: "HTML", icon: FileText, color: "text-orange-500" },
+        { name: "CSS", icon: Palette, color: "text-blue-500" }
       ]
     }
   ];
 
-  const SkillBar = ({ name, level, color }: { name: string; level: number; color: string }) => (
-    <div className="mb-4">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-foreground">{name}</span>
-        <span className="text-sm text-muted-foreground">{level}%</span>
+  const SkillIcon = ({ name, icon: IconComponent, color }: { name: string; icon: any; color: string }) => (
+    <div className="flex flex-col items-center group hover:scale-110 transition-transform duration-300">
+      <div className="p-4 bg-card border border-border rounded-xl mb-3 group-hover:border-primary/50 group-hover:shadow-glow-primary/20 transition-all duration-300">
+        <IconComponent className={`w-8 h-8 ${color}`} />
       </div>
-      <div className="w-full bg-secondary rounded-full h-2">
-        <div 
-          className={`h-2 rounded-full bg-gradient-to-r ${color} transition-all duration-1000 ease-out`}
-          style={{ width: `${level}%` }}
-        />
-      </div>
+      <span className="text-sm font-medium text-foreground text-center">{name}</span>
     </div>
   );
 
@@ -68,12 +74,12 @@ const Skills = () => {
                   <h3 className="text-xl font-bold mb-6 text-center text-primary">
                     {skillGroup.category}
                   </h3>
-                  <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-6 justify-items-center">
                     {skillGroup.items.map((skill, skillIndex) => (
-                      <SkillBar 
+                      <SkillIcon 
                         key={skillIndex}
                         name={skill.name}
-                        level={skill.level}
+                        icon={skill.icon}
                         color={skill.color}
                       />
                     ))}

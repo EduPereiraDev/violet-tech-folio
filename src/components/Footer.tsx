@@ -73,7 +73,7 @@ const Footer = () => {
               </h4>
               <div className="flex gap-4 mb-4">
                 <a 
-                  href="https://github.com" 
+                  href="https://github.com/EduPereiraDev" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="p-3 bg-secondary rounded-xl hover:bg-primary/10 hover:border-primary border border-transparent transition-all duration-300"
@@ -81,7 +81,7 @@ const Footer = () => {
                   <Github className="w-5 h-5" />
                 </a>
                 <a 
-                  href="https://linkedin.com" 
+                  href="https://www.linkedin.com/in/eduardo-pereira-dos-santos-035311320" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="p-3 bg-secondary rounded-xl hover:bg-primary/10 hover:border-primary border border-transparent transition-all duration-300"
@@ -89,7 +89,7 @@ const Footer = () => {
                   <Linkedin className="w-5 h-5" />
                 </a>
                 <a 
-                  href="mailto:contato@email.com"
+                  href="mailto:pereirassantosedu@gmail.com"
                   className="p-3 bg-secondary rounded-xl hover:bg-primary/10 hover:border-primary border border-transparent transition-all duration-300"
                 >
                   <Mail className="w-5 h-5" />

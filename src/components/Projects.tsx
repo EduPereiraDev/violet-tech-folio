@@ -5,44 +5,22 @@ import { Github, ExternalLink, Code, Database, Cpu } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
-      title: "Sistema de E-commerce Inteligente",
-      description: "Plataforma completa de e-commerce com IA para recomendações personalizadas, análise de comportamento do usuário e otimização de conversões.",
-      technologies: ["React", "TypeScript", "Python", "GCP", "Docker"],
+      title: "Allest Assistant - Chatbot de Suporte",
+      description: "Chatbot inteligente para suporte empresarial com IA que busca respostas no banco de dados e encaminha automaticamente para especialistas quando necessário. Sistema completo desenvolvido para otimizar a equipe de suporte.",
+      technologies: ["TypeScript", "JavaScript", "CSS", "HTML", "API IA"],
       category: "Full Stack",
       icon: Code,
-      github: "#",
-      demo: "#",
+      github: "https://github.com/EduPereiraDev/Allest-Assistant",
       featured: true
     },
     {
-      title: "Dashboard Analytics IA",
-      description: "Interface administrativa com machine learning para análise preditiva de vendas, identificação de padrões e geração automática de relatórios.",
-      technologies: ["React", ".NET", "C#", "Python", "Docker"],
-      category: "Data Science",
+      title: "Alestfy - Plataforma Educacional Adaptativa",
+      description: "Plataforma educacional avançada com IA que personaliza conteúdo de acordo com as necessidades individuais de cada aluno. Sistema completo com autenticação, gestão de conteúdo, quizzes adaptativos e analytics detalhados.",
+      technologies: ["Next.js", "TypeScript", "Python", "Flask", "PostgreSQL"],
+      category: "Full Stack",
       icon: Database,
-      github: "#",
-      demo: "#",
+      github: "https://github.com/alest-github/Mestre.AI",
       featured: true
-    },
-    {
-      title: "API de Processamento Inteligente",
-      description: "API robusta para processamento de documentos com IA, extração automática de dados e integração com sistemas legados.",
-      technologies: ["Python", ".NET", "Docker", "GCP"],
-      category: "Backend",
-      icon: Cpu,
-      github: "#",
-      demo: "#",
-      featured: false
-    },
-    {
-      title: "App Mobile Responsivo",
-      description: "Aplicação mobile híbrida com interface moderna, sincronização em tempo real e funcionalidades offline.",
-      technologies: ["React", "TypeScript", "CSS"],
-      category: "Mobile",
-      icon: Code,
-      github: "#",
-      demo: "#",
-      featured: false
     }
   ];
 
@@ -97,26 +75,16 @@ const Projects = () => {
                     ))}
                   </div>
                   
-                  <div className="flex gap-3">
+                  <div className="flex justify-center">
                     <Button 
                       variant="outline" 
                       size="sm"
-                      className="flex-1 hover:bg-primary/10 border-primary/30"
+                      className="w-full hover:bg-primary/10 border-primary/30"
                       asChild
                     >
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
                         <Github className="w-4 h-4 mr-2" />
-                        Código
-                      </a>
-                    </Button>
-                    <Button 
-                      size="sm"
-                      className="flex-1 bg-gradient-primary hover:shadow-glow-primary transition-all duration-300"
-                      asChild
-                    >
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Demo
+                        Ver Código
                       </a>
                     </Button>
                   </div>

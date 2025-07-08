@@ -35,7 +35,7 @@ const About = () => {
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Sou um desenvolvedor apaixonado por tecnologia, sempre em busca de soluções inovadoras 
-              e eficientes. Com anos de experiência em desenvolvimento de software, especializo-me em 
+              e eficientes. Com a minha experiência em desenvolvimento de software, especializo-me em 
               criar aplicações que combinam performance, usabilidade e design moderno.
             </p>
           </div>

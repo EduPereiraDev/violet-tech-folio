@@ -26,33 +26,53 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simulação do envio do formulário
+    // Validar campos obrigatórios
+    if (!formData.name || !formData.email || !formData.message) {
+      toast({
+        title: "Erro!",
+        description: "Por favor, preencha todos os campos obrigatórios.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Criar link mailto com os dados do formulário
+    const subject = formData.subject || `Contato de ${formData.name}`;
+    const body = `Nome: ${formData.name}\nEmail: ${formData.email}\n\nMensagem:\n${formData.message}`;
+    
+    const mailtoLink = `mailto:pereirassantosedu@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Abrir cliente de email padrão
+    window.location.href = mailtoLink;
+    
     toast({
-      title: "Mensagem enviada!",
-      description: "Obrigado pelo contato. Retornarei em breve!",
+      title: "Cliente de email aberto!",
+      description: "Termine de enviar a mensagem no seu cliente de email.",
     });
     
-    // Reset do formulário
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
+    // Reset do formulário após um pequeno delay
+    setTimeout(() => {
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    }, 1000);
   };
 
   const contactInfo = [
     {
       icon: Mail,
       label: "Email",
-      value: "contato@desenvolvedor.com",
-      link: "mailto:contato@desenvolvedor.com"
+      value: "pereirassantosedu@gmail.com",
+      link: "mailto:pereirassantosedu@gmail.com"
     },
     {
       icon: Phone,
       label: "Telefone",
-      value: "+55 (11) 99999-9999",
-      link: "tel:+5511999999999"
+      value: "+55 (35) 987062645",
+      link: "tel:+5535987062645"
     },
     {
       icon: MapPin,
