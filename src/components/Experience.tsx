@@ -6,18 +6,20 @@ const Experience = () => {
   const experiences = [
     {
       company: "ALEST",
-      position: "Desenvolvedor Full Stack",
+      position: "Desenvolvedor Full Stack & Tech Lead",
       type: "CLT",
       period: "2025 - Atual",
       location: "São Paulo, BR",
       status: "current",
-      description: "Atuo como Desenvolvedor Full Stack para a Alest, sendo o ponto de contato técnico dentro da equipe da Inspirali. Minhas responsabilidades incluem o ciclo completo de desenvolvimento de software, desde a interface e experiência do usuário (frontend) até a lógica de servidor (backend) e a gestão do banco de dados.",
-      technologies: ["React", "TypeScript", "Node.js", "PostgreSQL", "MongoDB", "C#", ".NET"],
+      description: "Atuo como Desenvolvedor Full Stack e Tech Lead, sendo ponto de contato técnico em grandes clientes e liderando projetos de alta complexidade. Responsável pelo ciclo completo de desenvolvimento — do frontend ao backend — além de arquitetura de soluções, integrações com IA e deploy em cloud.",
+      technologies: ["React", "Vue.js", "Angular", "TypeScript", "Node.js", "NestJS", "Python", "FastAPI", "C#", ".NET", "PostgreSQL", "MongoDB", "Docker", "AWS", "GCP", "Azure"],
       achievements: [
-        "Ponto de contato técnico na equipe Inspirali",
-        "Desenvolvimento full stack completo",
-        "Gestão de banco de dados e arquitetura",
-        "Interface e experiência do usuário"
+        "Ponto de contato técnico na GOL Linhas Aéreas",
+        "Líder técnico do primeiro projeto de Contact Center da América Latina com Zoom para a GOL",
+        "Desenvolvimento full stack com React, Vue.js e Angular",
+        "APIs e microsserviços com NestJS, FastAPI e .NET",
+        "Deploy em cloud com Docker, AWS, GCP e Azure",
+        "Integrações com IA (Gemini, OpenAI) e automações"
       ],
       icon: "monitor"
     },

@@ -5,21 +5,21 @@ import { Github, ExternalLink, Code, Database, Cpu } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
-      title: "Allest Assistant - Chatbot de Suporte",
-      description: "Chatbot inteligente para suporte empresarial com IA que busca respostas no banco de dados e encaminha automaticamente para especialistas quando necessário. Sistema completo desenvolvido para otimizar a equipe de suporte.",
-      technologies: ["TypeScript", "JavaScript", "CSS", "HTML", "API IA"],
+      title: "Financial Control - Controle Financeiro Pessoal",
+      description: "Sistema completo de controle financeiro com multi-usuário, relatórios por período (diário a anual), gráficos interativos e gestão de categorias. Arquitetura Clean com .NET 8 no backend e React no frontend.",
+      technologies: ["React", "TypeScript", ".NET 8", "PostgreSQL", "Docker"],
       category: "Full Stack",
-      icon: Code,
-      github: "https://github.com/EduPereiraDev/Allest-Assistant",
+      icon: Database,
+      github: "https://github.com/EduPereiraDev/financial-project",
       featured: true
     },
     {
-      title: "Alestfy - Plataforma Educacional Adaptativa",
-      description: "Plataforma educacional avançada com IA que personaliza conteúdo de acordo com as necessidades individuais de cada aluno. Sistema completo com autenticação, gestão de conteúdo, quizzes adaptativos e analytics detalhados.",
-      technologies: ["Next.js", "TypeScript", "Python", "Flask", "PostgreSQL"],
-      category: "Full Stack",
-      icon: Database,
-      github: "https://github.com/EduPereiraDev/MestreAI",
+      title: "Expert Skills - Plataforma SaaS de Análise",
+      description: "Plataforma SaaS com análise automatizada via IA, dashboard em tempo real, gestão inteligente e sistema de assinaturas. Monorepo com Turborepo, Next.js 14 no frontend e NestJS no backend.",
+      technologies: ["Next.js", "TypeScript", "NestJS", "Prisma", "OpenAI"],
+      category: "Full Stack + IA",
+      icon: Cpu,
+      github: "https://github.com/EduPereiraDev/expertskill",
       featured: true
     }
   ];

@@ -1,69 +1,67 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Award, Calendar, Brain, Languages } from "lucide-react";
+import { Award, Calendar, ExternalLink } from "lucide-react";
 
 const Certificates = () => {
   const renderIcon = (icon: string) => {
     if (icon.startsWith('/')) {
-      // É uma imagem
       return (
         <div className="p-2 rounded-lg border-2 border-purple-500/30 bg-purple-500/5">
           <img 
             src={icon} 
             alt="Certificate badge" 
-            className="w-10 h-10 object-contain rounded-md"
+            className="w-14 h-14 object-contain"
           />
         </div>
       );
-    } else {
-      // É um ícone do Lucide
-      return (
-        <div className="p-2 rounded-lg border-2 border-purple-500/30 bg-purple-500/10">
-          {icon === 'brain' ? (
-            <Brain className="h-10 w-10 text-purple-400" />
-          ) : (
-            <Languages className="h-10 w-10 text-purple-400" />
-          )}
-        </div>
-      );
     }
+    return (
+      <div className="p-2 rounded-lg border-2 border-purple-500/30 bg-purple-500/10">
+        <Award className="h-10 w-10 text-purple-400" />
+      </div>
+    );
   };
 
   const certificates = [
     {
-      name: "Google Workspace Sales Credential",
-      issuer: "Google",
-      category: "Cloud & Productivity",
-      description: "Credencial de vendas para Google Workspace, demonstrando conhecimento em soluções de produtividade empresarial.",
-      icon: "/pvg6p63tn9s4i3s3vsr8vnozu7ns.webp"
+      name: "AWS Certified Security – Specialty",
+      issuer: "Amazon Web Services",
+      category: "Security — Advanced",
+      description: "Certificação avançada em segurança AWS: design, implementação e troubleshooting de modelos de segurança no AWS Cloud, incluindo shared responsibility model.",
+      icon: "/aws-security-specialty.png",
+      date: "Março 2026",
+      expires: "Março 2029",
+      link: "https://www.credly.com/badges/32b82b1c-79b5-4078-9eec-f1a16cabc0be/linked_in"
+    },
+    {
+      name: "AWS Certified Developer – Associate",
+      issuer: "Amazon Web Services",
+      category: "Developer — Intermediate",
+      description: "Proficiência em desenvolvimento de aplicações com AWS APIs, CLI e SDKs, uso de containers e deploy com CI/CD pipelines seguindo as melhores práticas AWS.",
+      icon: "/aws-developer-associate.png",
+      date: "Dezembro 2025",
+      expires: "Dezembro 2028",
+      link: "https://www.credly.com/badges/37cdb65e-9600-4dd4-a9b1-ab5a5dc38f67/linked_in"
     },
     {
       name: "Monday Partner Admin",
       issuer: "Monday.com",
       category: "Project Management",
       description: "Certificação em administração de parceiros Monday.com, focada em gestão de projetos e workflows.",
-      icon: "/Property-1partner-admin-Property-2desktop.png"
+      icon: "/Property-1partner-admin-Property-2desktop.png",
+      date: null,
+      expires: null,
+      link: null
     },
     {
       name: "Monday CRM",
       issuer: "Monday.com", 
       category: "CRM & Sales",
       description: "Especialização em Monday CRM para gestão de relacionamento com clientes e processos de vendas.",
-      icon: "/CRM-1024x1024-1.png"
-    },
-    {
-      name: "Tech Week - IA",
-      issuer: "Tech Week",
-      category: "Artificial Intelligence",
-      description: "Participação em evento especializado em Inteligência Artificial e suas aplicações tecnológicas.",
-      icon: "brain"
-    },
-    {
-      name: "Small Talk 2 Me - English",
-      issuer: "Small Talk 2 Me",
-      category: "Language Learning",
-      description: "Certificação em inglês focada em conversação e comunicação efetiva no ambiente profissional.",
-      icon: "languages"
+      icon: "/CRM-1024x1024-1.png",
+      date: null,
+      expires: null,
+      link: null
     }
   ];
 
@@ -83,7 +81,9 @@ const Certificates = () => {
           {certificates.map((cert, index) => (
             <Card 
               key={index} 
-              className="w-full max-w-sm group hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 border-2 hover:border-purple-500/30 bg-card/50 backdrop-blur-sm"
+              className={`w-full max-w-sm group hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 border-2 hover:border-purple-500/30 bg-card/50 backdrop-blur-sm ${
+                cert.link ? 'border-purple-500/20' : ''
+              }`}
             >
               <CardContent className="p-6">
                 <div className="flex items-start gap-4 mb-4">
@@ -110,11 +110,30 @@ const Certificates = () => {
                   {cert.description}
                 </p>
                 
-                <div className="mt-4 pt-4 border-t border-border/50">
-                  <div className="flex items-center text-xs text-muted-foreground">
-                    <Calendar className="h-3 w-3 mr-1" />
-                    <span>Certificado</span>
-                  </div>
+                <div className="mt-4 pt-4 border-t border-border/50 space-y-2">
+                  {cert.date && (
+                    <div className="flex items-center text-xs text-muted-foreground">
+                      <Calendar className="h-3 w-3 mr-1" />
+                      <span>{cert.date} — válido até {cert.expires}</span>
+                    </div>
+                  )}
+                  {!cert.date && (
+                    <div className="flex items-center text-xs text-muted-foreground">
+                      <Calendar className="h-3 w-3 mr-1" />
+                      <span>Certificado</span>
+                    </div>
+                  )}
+                  {cert.link && (
+                    <a 
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-xs text-purple-400 hover:text-purple-300 transition-colors"
+                    >
+                      <ExternalLink className="h-3 w-3" />
+                      <span>Verificar no Credly</span>
+                    </a>
+                  )}
                 </div>
               </CardContent>
             </Card>

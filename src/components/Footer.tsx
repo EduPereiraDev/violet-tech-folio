@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -103,12 +103,9 @@ const Footer = () => {
           
           {/* Linha Divisória */}
           <div className="border-t border-border pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex justify-center items-center">
               <p className="text-muted-foreground text-sm">
-                © 2024 Desenvolvedor Full Stack. Todos os direitos reservados.
-              </p>
-              <p className="text-muted-foreground text-sm flex items-center gap-1">
-                Feito com <Heart className="w-4 h-4 text-red-500" /> usando React & TypeScript
+                © 2026 Eduardo Pereira. Todos os direitos reservados.
               </p>
             </div>
           </div>

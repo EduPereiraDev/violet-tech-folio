@@ -6,43 +6,86 @@ import {
   Container, 
   GitBranch, 
   Cloud, 
-  FileText, 
-  Palette,
   Braces,
-  Database
+  Database,
+  Server,
+  Brain,
+  Box,
+  Layers,
+  Globe,
+  Shield,
+  Cpu,
+  Workflow,
+  Terminal,
+  Blocks,
+  type LucideIcon
 } from "lucide-react";
 
 const Skills = () => {
   const skills = [
     {
-      category: "Linguagens de Programação",
+      category: "Linguagens",
       items: [
         { name: "TypeScript", icon: Code2, color: "text-blue-500" },
-        { name: "Python", icon: FileCode, color: "text-yellow-500" },
         { name: "JavaScript", icon: Braces, color: "text-yellow-400" },
+        { name: "Python", icon: FileCode, color: "text-yellow-500" },
         { name: "C#", icon: Code2, color: "text-purple-500" },
-        { name: ".NET", icon: Database, color: "text-purple-600" }
+        { name: "SQL", icon: Database, color: "text-sky-400" },
+        { name: "HTML/CSS", icon: Globe, color: "text-orange-500" }
       ]
     },
     {
-      category: "Tecnologias & Ferramentas",
+      category: "Frontend",
       items: [
         { name: "React", icon: Component, color: "text-cyan-400" },
-        { name: "Docker", icon: Container, color: "text-blue-600" },
-        { name: "Git", icon: GitBranch, color: "text-orange-500" },
-        { name: "GCP", icon: Cloud, color: "text-green-500" }
+        { name: "Vue.js", icon: Layers, color: "text-emerald-500" },
+        { name: "Angular", icon: Shield, color: "text-red-500" },
+        { name: "Next.js", icon: Blocks, color: "text-white" },
+        { name: "Tailwind CSS", icon: Layers, color: "text-sky-400" }
       ]
     },
     {
-      category: "Tecnologias Web",
+      category: "Backend",
       items: [
-        { name: "HTML", icon: FileText, color: "text-orange-500" },
-        { name: "CSS", icon: Palette, color: "text-blue-500" }
+        { name: "Node.js", icon: Server, color: "text-green-500" },
+        { name: "NestJS", icon: Box, color: "text-red-400" },
+        { name: "FastAPI", icon: Cpu, color: "text-teal-400" },
+        { name: "Flask", icon: Terminal, color: "text-gray-300" },
+        { name: ".NET", icon: Code2, color: "text-purple-600" }
+      ]
+    },
+    {
+      category: "Banco de Dados",
+      items: [
+        { name: "PostgreSQL", icon: Database, color: "text-blue-400" },
+        { name: "MongoDB", icon: Database, color: "text-green-500" },
+        { name: "Supabase", icon: Database, color: "text-emerald-400" },
+        { name: "Neo4j", icon: Workflow, color: "text-sky-300" }
+      ]
+    },
+    {
+      category: "DevOps & Cloud",
+      items: [
+        { name: "Docker", icon: Container, color: "text-blue-500" },
+        { name: "Kubernetes", icon: Box, color: "text-blue-400" },
+        { name: "AWS", icon: Cloud, color: "text-orange-400" },
+        { name: "GCP", icon: Cloud, color: "text-green-400" },
+        { name: "Azure", icon: Cloud, color: "text-sky-500" },
+        { name: "Git", icon: GitBranch, color: "text-orange-500" }
+      ]
+    },
+    {
+      category: "IA & Automação",
+      items: [
+        { name: "Google Gemini", icon: Brain, color: "text-blue-400" },
+        { name: "AI Agents", icon: Cpu, color: "text-purple-400" },
+        { name: "OpenAI", icon: Brain, color: "text-emerald-400" },
+        { name: "Automações", icon: Workflow, color: "text-pink-400" }
       ]
     }
   ];
 
-  const SkillIcon = ({ name, icon: IconComponent, color }: { name: string; icon: any; color: string }) => (
+  const SkillIcon = ({ name, icon: IconComponent, color }: { name: string; icon: LucideIcon; color: string }) => (
     <div className="flex flex-col items-center group hover:scale-110 transition-transform duration-300">
       <div className="p-4 bg-card border border-border rounded-xl mb-3 group-hover:border-primary/50 group-hover:shadow-glow-primary/20 transition-all duration-300">
         <IconComponent className={`w-8 h-8 ${color}`} />
@@ -60,7 +103,7 @@ const Skills = () => {
               Skills & Tecnologias
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Conjunto abrangente de tecnologias e linguagens que domino para criar soluções completas e modernas.
+              Stack completa construída em projetos reais — do frontend ao deploy em cloud, passando por IA e automação.
             </p>
           </div>
           

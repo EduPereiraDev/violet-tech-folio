@@ -1,27 +1,27 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Code, Database, Globe, Smartphone } from "lucide-react";
+import { Code, Database, Cloud, Brain } from "lucide-react";
 
 const About = () => {
   const features = [
     {
       icon: Code,
       title: "Desenvolvimento Full Stack",
-      description: "Experiência completa em frontend e backend, criando aplicações robustas e escaláveis."
+      description: "React, Vue.js, Angular no frontend. Node.js, NestJS, FastAPI e .NET no backend — aplicações completas em produção."
+    },
+    {
+      icon: Cloud,
+      title: "Cloud & DevOps",
+      description: "Deploy com Docker, Kubernetes e Helm em AWS, GCP e Azure. CI/CD e infraestrutura como código."
+    },
+    {
+      icon: Brain,
+      title: "IA & Automação",
+      description: "Agentes inteligentes com Google Gemini e OpenAI. Automações que otimizam processos e reduzem trabalho manual."
     },
     {
       icon: Database,
       title: "Banco de Dados",
-      description: "Expertise em diferentes tipos de bancos de dados, desde SQL até NoSQL e soluções em nuvem."
-    },
-    {
-      icon: Globe,
-      title: "Tecnologias Web",
-      description: "Domínio das tecnologias web modernas para criar experiências digitais excepcionais."
-    },
-    {
-      icon: Smartphone,
-      title: "Aplicações Responsivas",
-      description: "Desenvolvimento de interfaces que funcionam perfeitamente em todos os dispositivos."
+      description: "PostgreSQL, MongoDB, Neo4j e Supabase — modelagem, migrações e otimização de queries em projetos reais."
     }
   ];
 
@@ -34,9 +34,9 @@ const About = () => {
               Sobre Mim
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Sou um desenvolvedor apaixonado por tecnologia, sempre em busca de soluções inovadoras 
-              e eficientes. Com a minha experiência em desenvolvimento de software, especializo-me em 
-              criar aplicações que combinam performance, usabilidade e design moderno.
+              Desenvolvedor Full Stack & Tech Lead cursando Ciências da Computação na UAM (2022–2026). 
+              Trabalho com React, Vue.js, Angular, Node.js, Python e .NET em projetos reais — 
+              de sistemas corporativos de alta complexidade a integrações com IA e automações em cloud.
             </p>
           </div>
           

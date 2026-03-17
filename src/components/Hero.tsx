@@ -6,7 +6,7 @@ import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
 const Hero = () => {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
-    () => ["Full Stack", "Frontend", "Backend", "AI Stack", "Web Stack"],
+    () => ["Full Stack", "Tech Lead", "Frontend", "Backend", "Cloud & IA"],
     []
   );
 
@@ -67,8 +67,8 @@ const Hero = () => {
           </div>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            Eduardo Pereira, especialista em criar soluções digitais modernas e eficientes, 
-            com foco em desenvolvimento web, inteligência artificial e experiência do usuário.
+            Eduardo Pereira — Desenvolvedor Full Stack & Tech Lead com foco em 
+            arquitetura de soluções, integrações com IA e deploy em cloud.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
