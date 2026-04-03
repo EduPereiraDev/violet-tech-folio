@@ -19,6 +19,8 @@ interface NavBarProps {
 export function TubelightNavBar({ items, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items[0].name)
   const [isMobile, setIsMobile] = useState(false)
+  const [visible, setVisible] = useState(true)
+  const lastScrollY = React.useRef(0)
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,6 +30,23 @@ export function TubelightNavBar({ items, className }: NavBarProps) {
     handleResize()
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY
+      if (currentY < 80) {
+        setVisible(true)
+      } else if (currentY > lastScrollY.current) {
+        setVisible(false)
+      } else {
+        setVisible(true)
+      }
+      lastScrollY.current = currentY
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const handleClick = (item: NavItem) => {
@@ -42,7 +61,8 @@ export function TubelightNavBar({ items, className }: NavBarProps) {
   return (
     <div
       className={cn(
-        "fixed top-0 left-1/2 -translate-x-1/2 z-50 pt-6",
+        "fixed top-0 left-1/2 -translate-x-1/2 z-50 pt-6 transition-transform duration-300",
+        visible ? "translate-y-0" : "-translate-y-full",
         className,
       )}
     >
