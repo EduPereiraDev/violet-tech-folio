@@ -1,12 +1,17 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink, Code, Database, Cpu } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const Projects = () => {
+  const { language } = useLanguage();
+  const t = translations[language].projects;
+
   const projects = [
     {
-      title: "Financial Control - Controle Financeiro Pessoal",
-      description: "Sistema completo de controle financeiro com multi-usuário, relatórios por período (diário a anual), gráficos interativos e gestão de categorias. Arquitetura Clean com .NET 8 no backend e React no frontend.",
+      title: t.items[0].title,
+      description: t.items[0].description,
       technologies: ["React", "TypeScript", ".NET 8", "PostgreSQL", "Docker"],
       category: "Full Stack",
       icon: Database,
@@ -14,8 +19,8 @@ const Projects = () => {
       featured: true
     },
     {
-      title: "Expert Skills - Plataforma SaaS de Análise",
-      description: "Plataforma SaaS com análise automatizada via IA, dashboard em tempo real, gestão inteligente e sistema de assinaturas. Monorepo com Turborepo, Next.js 14 no frontend e NestJS no backend.",
+      title: t.items[1].title,
+      description: t.items[1].description,
       technologies: ["Next.js", "TypeScript", "NestJS", "Prisma", "OpenAI"],
       category: "Full Stack + IA",
       icon: Cpu,
@@ -30,11 +35,10 @@ const Projects = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 pb-2 leading-tight bg-gradient-primary bg-clip-text text-transparent">
-              Portfólio de Projetos
+              {t.title}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Seleção dos meus projetos mais relevantes, demonstrando expertise em desenvolvimento 
-              full stack, inteligência artificial e soluções inovadoras.
+              {t.subtitle}
             </p>
           </div>
           
@@ -84,7 +88,7 @@ const Projects = () => {
                     >
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
                         <Github className="w-4 h-4 mr-2" />
-                        Ver Código
+                        {t.view_code}
                       </a>
                     </Button>
                   </div>

@@ -1,8 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, Calendar, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const Certificates = () => {
+  const { language } = useLanguage();
+  const t = translations[language].certificates;
   const renderIcon = (icon: string) => {
     if (icon.startsWith('/')) {
       return (
@@ -27,27 +31,27 @@ const Certificates = () => {
       name: "AWS Certified Security – Specialty",
       issuer: "Amazon Web Services",
       category: "Security — Advanced",
-      description: "Certificação avançada em segurança AWS: design, implementação e troubleshooting de modelos de segurança no AWS Cloud, incluindo shared responsibility model.",
+      description: t.items[0].description,
       icon: "/aws-security-specialty.png",
-      date: "Março 2026",
-      expires: "Março 2029",
+      date: t.items[0].date,
+      expires: t.items[0].expires,
       link: "https://www.credly.com/badges/32b82b1c-79b5-4078-9eec-f1a16cabc0be/linked_in"
     },
     {
       name: "AWS Certified Developer – Associate",
       issuer: "Amazon Web Services",
       category: "Developer — Intermediate",
-      description: "Proficiência em desenvolvimento de aplicações com AWS APIs, CLI e SDKs, uso de containers e deploy com CI/CD pipelines seguindo as melhores práticas AWS.",
+      description: t.items[1].description,
       icon: "/aws-developer-associate.png",
-      date: "Dezembro 2025",
-      expires: "Dezembro 2028",
+      date: t.items[1].date,
+      expires: t.items[1].expires,
       link: "https://www.credly.com/badges/37cdb65e-9600-4dd4-a9b1-ab5a5dc38f67/linked_in"
     },
     {
       name: "Monday Partner Admin",
       issuer: "Monday.com",
       category: "Project Management",
-      description: "Certificação em administração de parceiros Monday.com, focada em gestão de projetos e workflows.",
+      description: t.items[2].description,
       icon: "/Property-1partner-admin-Property-2desktop.png",
       date: null,
       expires: null,
@@ -55,9 +59,9 @@ const Certificates = () => {
     },
     {
       name: "Monday CRM",
-      issuer: "Monday.com", 
+      issuer: "Monday.com",
       category: "CRM & Sales",
-      description: "Especialização em Monday CRM para gestão de relacionamento com clientes e processos de vendas.",
+      description: t.items[3].description,
       icon: "/CRM-1024x1024-1.png",
       date: null,
       expires: null,
@@ -70,10 +74,10 @@ const Certificates = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 pb-2 leading-tight bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Certificações
+            {t.title}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Certificações e qualificações que validam minha expertise em diferentes áreas da tecnologia e negócios.
+            {t.subtitle}
           </p>
         </div>
 
@@ -114,13 +118,13 @@ const Certificates = () => {
                   {cert.date && (
                     <div className="flex items-center text-xs text-muted-foreground">
                       <Calendar className="h-3 w-3 mr-1" />
-                      <span>{cert.date} — válido até {cert.expires}</span>
+                      <span>{cert.date} — {t.valid_until} {cert.expires}</span>
                     </div>
                   )}
                   {!cert.date && (
                     <div className="flex items-center text-xs text-muted-foreground">
                       <Calendar className="h-3 w-3 mr-1" />
-                      <span>Certificado</span>
+                      <span>{t.certified}</span>
                     </div>
                   )}
                   {cert.link && (
@@ -131,7 +135,7 @@ const Certificates = () => {
                       className="flex items-center gap-1 text-xs text-purple-400 hover:text-purple-300 transition-colors"
                     >
                       <ExternalLink className="h-3 w-3" />
-                      <span>Verificar no Credly</span>
+                      <span>{t.verify}</span>
                     </a>
                   )}
                 </div>
@@ -144,7 +148,7 @@ const Certificates = () => {
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-purple-500/10 border border-purple-500/20">
             <Award className="h-5 w-5 text-purple-400" />
             <span className="text-sm text-purple-300 font-medium">
-              Sempre buscando novas certificações e conhecimentos
+              {t.footer}
             </span>
           </div>
         </div>

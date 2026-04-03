@@ -1,29 +1,19 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Code, Database, Cloud, Brain } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const About = () => {
-  const features = [
-    {
-      icon: Code,
-      title: "Desenvolvimento Full Stack",
-      description: "React, Vue.js, Angular no frontend. Node.js, NestJS, FastAPI e .NET no backend — aplicações completas em produção."
-    },
-    {
-      icon: Cloud,
-      title: "Cloud & DevOps",
-      description: "Deploy com Docker, Kubernetes e Helm em AWS, GCP e Azure. CI/CD e infraestrutura como código."
-    },
-    {
-      icon: Brain,
-      title: "IA & Automação",
-      description: "Agentes inteligentes com Google Gemini e OpenAI. Automações que otimizam processos e reduzem trabalho manual."
-    },
-    {
-      icon: Database,
-      title: "Banco de Dados",
-      description: "PostgreSQL, MongoDB, Neo4j e Supabase — modelagem, migrações e otimização de queries em projetos reais."
-    }
-  ];
+  const { language } = useLanguage();
+  const t = translations[language].about;
+
+  const icons = [Code, Cloud, Brain, Database];
+
+  const features = t.cards.map((card, i) => ({
+    icon: icons[i],
+    title: card.title,
+    description: card.description,
+  }));
 
   return (
     <section id="about" className="py-20 bg-background">
@@ -31,12 +21,10 @@ const About = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Sobre Mim
+              {t.title}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Desenvolvedor Full Stack & Tech Lead cursando Ciências da Computação na UAM (2022–2026). 
-              Trabalho com React, Vue.js, Angular, Node.js, Python e .NET em projetos reais — 
-              de sistemas corporativos de alta complexidade a integrações com IA e automações em cloud.
+              {t.description}
             </p>
           </div>
           

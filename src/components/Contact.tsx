@@ -5,8 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const Contact = () => {
+  const { language } = useLanguage();
+  const t = translations[language].contact;
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,8 +34,8 @@ const Contact = () => {
     // Validar campos obrigatórios
     if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "Erro!",
-        description: "Por favor, preencha todos os campos obrigatórios.",
+        title: t.toast_error_title,
+        description: t.toast_error_desc,
         variant: "destructive"
       });
       return;
@@ -46,8 +51,8 @@ const Contact = () => {
     window.location.href = mailtoLink;
     
     toast({
-      title: "Cliente de email aberto!",
-      description: "Termine de enviar a mensagem no seu cliente de email.",
+      title: t.toast_success_title,
+      description: t.toast_success_desc,
     });
     
     // Reset do formulário após um pequeno delay
@@ -64,20 +69,20 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: Mail,
-      label: "Email",
+      label: t.email_info_label,
       value: "pereirassantosedu@gmail.com",
       link: "mailto:pereirassantosedu@gmail.com"
     },
     {
       icon: Phone,
-      label: "Telefone",
+      label: t.phone_label,
       value: "+55 (11) 94771-3875",
       link: "tel:+5511947713875"
     },
     {
       icon: MapPin,
-      label: "Localização",
-      value: "São Paulo, Brasil",
+      label: t.location_label,
+      value: t.location_value,
       link: null
     }
   ];
@@ -88,11 +93,10 @@ const Contact = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Entre em Contato
+              {t.title}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Vamos conversar sobre seu próximo projeto! Estou sempre aberto a novas oportunidades 
-              e desafios interessantes.
+              {t.subtitle}
             </p>
           </div>
           
@@ -101,7 +105,7 @@ const Contact = () => {
             <div className="space-y-8">
               <div>
                 <h3 className="text-2xl font-bold mb-6 text-foreground">
-                  Informações de Contato
+                  {t.info_title}
                 </h3>
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
@@ -130,11 +134,10 @@ const Contact = () => {
               <Card className="bg-gradient-primary/5 border-primary/20">
                 <CardContent className="p-6">
                   <h4 className="text-lg font-semibold mb-3 text-primary">
-                    Disponibilidade
+                    {t.availability_title}
                   </h4>
                   <p className="text-muted-foreground">
-                    Atualmente disponível para projetos freelance e oportunidades 
-                    de trabalho remoto. Respondo a todos os contatos em até 24 horas.
+                    {t.availability_text}
                   </p>
                 </CardContent>
               </Card>
@@ -144,14 +147,14 @@ const Contact = () => {
             <Card className="bg-card border-border hover:shadow-glow-card transition-all duration-300">
               <CardContent className="p-6">
                 <h3 className="text-2xl font-bold mb-6 text-foreground">
-                  Envie uma Mensagem
+                  {t.form_title}
                 </h3>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                        Nome
+                        {t.name_label}
                       </label>
                       <Input
                         id="name"
@@ -159,14 +162,14 @@ const Contact = () => {
                         type="text"
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="Seu nome completo"
+                        placeholder={t.name_placeholder}
                         required
                         className="bg-secondary border-border focus:border-primary"
                       />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                        Email
+                        {t.email_label}
                       </label>
                       <Input
                         id="email"
@@ -174,7 +177,7 @@ const Contact = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        placeholder="seu@email.com"
+                        placeholder={t.email_placeholder}
                         required
                         className="bg-secondary border-border focus:border-primary"
                       />
@@ -183,7 +186,7 @@ const Contact = () => {
                   
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                      Assunto
+                      {t.subject_label}
                     </label>
                     <Input
                       id="subject"
@@ -191,7 +194,7 @@ const Contact = () => {
                       type="text"
                       value={formData.subject}
                       onChange={handleInputChange}
-                      placeholder="Assunto da mensagem"
+                      placeholder={t.subject_placeholder}
                       required
                       className="bg-secondary border-border focus:border-primary"
                     />
@@ -199,14 +202,14 @@ const Contact = () => {
                   
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                      Mensagem
+                      {t.message_label}
                     </label>
                     <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
-                      placeholder="Descreva seu projeto ou como posso ajudá-lo..."
+                      placeholder={t.message_placeholder}
                       required
                       rows={6}
                       className="bg-secondary border-border focus:border-primary resize-none"
@@ -219,7 +222,7 @@ const Contact = () => {
                     size="lg"
                   >
                     <Send className="w-5 h-5 mr-2" />
-                    Enviar Mensagem
+                    {t.send_button}
                   </Button>
                 </form>
               </CardContent>

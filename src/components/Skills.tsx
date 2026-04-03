@@ -20,11 +20,16 @@ import {
   Blocks,
   type LucideIcon
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const Skills = () => {
+  const { language } = useLanguage();
+  const t = translations[language].skills;
+
   const skills = [
     {
-      category: "Linguagens",
+      category: t.categories.languages,
       items: [
         { name: "TypeScript", icon: Code2, color: "text-blue-500" },
         { name: "JavaScript", icon: Braces, color: "text-yellow-400" },
@@ -35,7 +40,7 @@ const Skills = () => {
       ]
     },
     {
-      category: "Frontend",
+      category: t.categories.frontend,
       items: [
         { name: "React", icon: Component, color: "text-cyan-400" },
         { name: "Vue.js", icon: Layers, color: "text-emerald-500" },
@@ -45,7 +50,7 @@ const Skills = () => {
       ]
     },
     {
-      category: "Backend",
+      category: t.categories.backend,
       items: [
         { name: "Node.js", icon: Server, color: "text-green-500" },
         { name: "NestJS", icon: Box, color: "text-red-400" },
@@ -55,7 +60,7 @@ const Skills = () => {
       ]
     },
     {
-      category: "Banco de Dados",
+      category: t.categories.database,
       items: [
         { name: "PostgreSQL", icon: Database, color: "text-blue-400" },
         { name: "MongoDB", icon: Database, color: "text-green-500" },
@@ -64,7 +69,7 @@ const Skills = () => {
       ]
     },
     {
-      category: "DevOps & Cloud",
+      category: t.categories.devops,
       items: [
         { name: "Docker", icon: Container, color: "text-blue-500" },
         { name: "Kubernetes", icon: Box, color: "text-blue-400" },
@@ -75,7 +80,7 @@ const Skills = () => {
       ]
     },
     {
-      category: "IA & Automação",
+      category: t.categories.ai,
       items: [
         { name: "Google Gemini", icon: Brain, color: "text-blue-400" },
         { name: "AI Agents", icon: Cpu, color: "text-purple-400" },
@@ -100,10 +105,10 @@ const Skills = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 pb-2 leading-tight bg-gradient-primary bg-clip-text text-transparent">
-              Skills & Tecnologias
+              {t.title}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Stack completa construída em projetos reais — do frontend ao deploy em cloud, passando por IA e automação.
+              {t.subtitle}
             </p>
           </div>
           

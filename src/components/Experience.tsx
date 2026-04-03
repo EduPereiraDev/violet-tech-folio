@@ -1,44 +1,36 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Briefcase, Calendar, MapPin, ArrowRight, Code, TrendingUp, Monitor, BarChart3 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const Experience = () => {
+  const { language } = useLanguage();
+  const t = translations[language].experience;
+
   const experiences = [
     {
       company: "ALEST",
-      position: "Desenvolvedor Full Stack & Tech Lead",
+      position: t.jobs[0].position,
       type: "CLT",
-      period: "2025 - Atual",
+      period: t.jobs[0].period,
       location: "São Paulo, BR",
       status: "current",
-      description: "Atuo como Desenvolvedor Full Stack e Tech Lead, sendo ponto de contato técnico em grandes clientes e liderando projetos de alta complexidade. Responsável pelo ciclo completo de desenvolvimento — do frontend ao backend — além de arquitetura de soluções, integrações com IA e deploy em cloud.",
+      description: t.jobs[0].description,
       technologies: ["React", "Vue.js", "Angular", "TypeScript", "Node.js", "NestJS", "Python", "FastAPI", "C#", ".NET", "PostgreSQL", "MongoDB", "Docker", "AWS", "GCP", "Azure"],
-      achievements: [
-        "Ponto de contato técnico na GOL Linhas Aéreas",
-        "Líder técnico do primeiro projeto de Contact Center da América Latina com Zoom para a GOL",
-        "Desenvolvimento full stack com React, Vue.js e Angular",
-        "APIs e microsserviços com NestJS, FastAPI e .NET",
-        "Deploy em cloud com Docker, AWS, GCP e Azure",
-        "Integrações com IA (Gemini, OpenAI) e automações"
-      ],
+      achievements: t.jobs[0].achievements,
       icon: "monitor"
     },
     {
       company: "VIDA + SAÚDE",
-      position: "Administração / Atendimento ao Público",
+      position: t.jobs[1].position,
       type: "Horista",
-      period: "2019 - Dezembro 2024",
-      location: "Alfenas, MG", 
+      period: t.jobs[1].period,
+      location: "Alfenas, MG",
       status: "completed",
-      description: "Fui responsável pela gestão dos processos de faturamento e emissão de notas fiscais, além de realizar análises financeiras detalhadas, fornecendo insights estratégicos para apoiar a tomada de decisões.",
+      description: t.jobs[1].description,
       technologies: ["Excel", "Microsoft 365", "Sistemas de Faturamento", "Análise de Dados"],
-      achievements: [
-        "Gestão completa de faturamento e NF-e",
-        "Análises financeiras detalhadas",
-        "Insights estratégicos para decisões",
-        "Atendimento ao público especializado",
-        "Mais de 5 anos de experiência"
-      ],
+      achievements: t.jobs[1].achievements,
       icon: "chart"
     }
   ];
@@ -48,10 +40,10 @@ const Experience = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 pb-2 leading-tight bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Experiência Profissional
+            {t.title}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Trajetória profissional construída com dedicação, crescimento contínuo e foco em resultados excepcionais.
+            {t.subtitle}
           </p>
         </div>
 
@@ -84,7 +76,7 @@ const Experience = () => {
                               </h3>
                               {exp.status === 'current' && (
                                 <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
-                                  Atual
+                                  {t.current_badge}
                                 </Badge>
                               )}
                             </div>
@@ -117,7 +109,7 @@ const Experience = () => {
                           <div>
                             <div className="flex items-center gap-2 mb-3">
                               <TrendingUp className="h-4 w-4 text-purple-400" />
-                              <span className="text-sm font-medium text-purple-300">Principais Conquistas</span>
+                              <span className="text-sm font-medium text-purple-300">{t.achievements_label}</span>
                             </div>
                             <ul className="space-y-2">
                               {exp.achievements.map((achievement, achIndex) => (
@@ -132,7 +124,7 @@ const Experience = () => {
                           <div>
                             <div className="flex items-center gap-2 mb-3">
                               <Code className="h-4 w-4 text-purple-400" />
-                              <span className="text-sm font-medium text-purple-300">Tecnologias & Ferramentas</span>
+                              <span className="text-sm font-medium text-purple-300">{t.tech_label}</span>
                             </div>
                             <div className="flex flex-wrap gap-2">
                               {exp.technologies.map((tech, techIndex) => (
@@ -159,7 +151,7 @@ const Experience = () => {
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-purple-500/10 border border-purple-500/20">
             <Briefcase className="h-5 w-5 text-purple-400" />
             <span className="text-sm text-purple-300 font-medium">
-              Construindo o futuro da tecnologia, uma linha de código por vez
+              {t.footer}
             </span>
           </div>
         </div>

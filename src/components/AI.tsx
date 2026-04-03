@@ -1,29 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Brain, Cpu, Database, Zap } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const AI = () => {
-  const aiFeatures = [
-    {
-      icon: Brain,
-      title: "Machine Learning",
-      description: "Desenvolvimento de modelos inteligentes para análise preditiva e automação de processos complexos."
-    },
-    {
-      icon: Cpu,
-      title: "Deep Learning",
-      description: "Implementação de redes neurais profundas para reconhecimento de padrões e processamento de dados."
-    },
-    {
-      icon: Database,
-      title: "Data Science",
-      description: "Análise e visualização de dados para extrair insights valiosos e orientar decisões estratégicas."
-    },
-    {
-      icon: Zap,
-      title: "Automação IA",
-      description: "Criação de soluções automatizadas que utilizam IA para otimizar fluxos de trabalho e produtividade."
-    }
-  ];
+  const { language } = useLanguage();
+  const t = translations[language].ai;
+
+  const icons = [Brain, Cpu, Database, Zap];
+  const aiFeatures = t.features.map((f, i) => ({ icon: icons[i], title: f.title, description: f.description }));
 
   return (
     <section id="ai" className="py-20 bg-background">
@@ -31,11 +16,10 @@ const AI = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 pb-2 leading-tight bg-gradient-primary bg-clip-text text-transparent">
-              Inteligência Artificial
+              {t.title}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Especialização em tecnologias de IA e Machine Learning, criando soluções inteligentes 
-              que transformam dados em valor e automatizam processos complexos.
+              {t.subtitle}
             </p>
           </div>
           
@@ -68,12 +52,10 @@ const AI = () => {
             <Card className="bg-gradient-primary/5 border-primary/20 max-w-4xl mx-auto">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-4 text-primary">
-                  Transformando o Futuro com IA
+                  {t.cta_title}
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  A inteligência artificial não é apenas o futuro - é o presente. Utilizo as mais modernas 
-                  tecnologias de IA para criar soluções que não apenas resolvem problemas atuais, mas 
-                  antecipam necessidades futuras, proporcionando vantagem competitiva real para negócios e projetos.
+                  {t.cta_description}
                 </p>
               </CardContent>
             </Card>

@@ -1,6 +1,11 @@
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const Footer = () => {
+  const { language } = useLanguage();
+  const t = translations[language].footer;
+
   return (
     <footer className="bg-gradient-dark border-t border-border py-12">
       <div className="container mx-auto px-4">
@@ -9,18 +14,17 @@ const Footer = () => {
             {/* Logo e Descrição */}
             <div className="md:col-span-1">
               <h3 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
-                Desenvolvedor Full Stack
+                {t.tagline}
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Criando soluções digitais inovadoras com foco em qualidade, 
-                performance e experiência do usuário excepcional.
+                {t.description}
               </p>
             </div>
             
             {/* Links Rápidos */}
             <div className="md:col-span-1">
               <h4 className="text-lg font-semibold text-foreground mb-4">
-                Navegação
+                {t.nav_title}
               </h4>
               <ul className="space-y-2">
                 <li>
@@ -28,7 +32,7 @@ const Footer = () => {
                     href="#about" 
                     className="text-muted-foreground hover:text-primary transition-colors duration-300"
                   >
-                    Sobre Mim
+                    {t.nav_links.about}
                   </a>
                 </li>
                 <li>
@@ -44,7 +48,7 @@ const Footer = () => {
                     href="#ai" 
                     className="text-muted-foreground hover:text-primary transition-colors duration-300"
                   >
-                    Inteligência Artificial
+                    {t.nav_links.ai}
                   </a>
                 </li>
                 <li>
@@ -52,7 +56,7 @@ const Footer = () => {
                     href="#projects" 
                     className="text-muted-foreground hover:text-primary transition-colors duration-300"
                   >
-                    Projetos
+                    {t.nav_links.projects}
                   </a>
                 </li>
                 <li>
@@ -60,7 +64,7 @@ const Footer = () => {
                     href="#contact" 
                     className="text-muted-foreground hover:text-primary transition-colors duration-300"
                   >
-                    Contato
+                    {t.nav_links.contact}
                   </a>
                 </li>
               </ul>
@@ -69,7 +73,7 @@ const Footer = () => {
             {/* Redes Sociais */}
             <div className="md:col-span-1">
               <h4 className="text-lg font-semibold text-foreground mb-4">
-                Conecte-se
+                {t.social_title}
               </h4>
               <div className="flex gap-4 mb-4">
                 <a 
@@ -96,7 +100,7 @@ const Footer = () => {
                 </a>
               </div>
               <p className="text-sm text-muted-foreground">
-                Sempre aberto a novas oportunidades e colaborações interessantes.
+                {t.social_text}
               </p>
             </div>
           </div>
@@ -105,7 +109,7 @@ const Footer = () => {
           <div className="border-t border-border pt-8">
             <div className="flex justify-center items-center">
               <p className="text-muted-foreground text-sm">
-                © 2026 Eduardo Pereira. Todos os direitos reservados.
+                {t.copyright}
               </p>
             </div>
           </div>

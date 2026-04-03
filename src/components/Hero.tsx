@@ -2,13 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const Hero = () => {
+  const { language } = useLanguage();
+  const t = translations[language].hero;
   const [titleNumber, setTitleNumber] = useState(0);
-  const titles = useMemo(
-    () => ["Full Stack", "Tech Lead", "Frontend", "Backend", "Cloud & IA"],
-    []
-  );
+  const titles = useMemo(() => t.titles, [t.titles]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -67,8 +68,7 @@ const Hero = () => {
           </div>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            Eduardo Pereira — Desenvolvedor Full Stack & Tech Lead com foco em 
-            arquitetura de soluções, integrações com IA e deploy em cloud.
+            {t.description}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -77,7 +77,7 @@ const Hero = () => {
               className="bg-gradient-primary hover:shadow-glow-primary transition-all duration-300 text-lg px-8 py-6"
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Ver Projetos
+              {t.cta_projects}
             </Button>
             
             <Button 
@@ -86,7 +86,7 @@ const Hero = () => {
               className="border-primary hover:bg-primary/10 text-lg px-8 py-6"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Entre em Contato
+              {t.cta_contact}
             </Button>
           </div>
           

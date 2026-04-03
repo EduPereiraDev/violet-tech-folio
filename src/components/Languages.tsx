@@ -1,32 +1,47 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Globe, Star, MessageCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 const Languages = () => {
-  const languages = [
+  const { language } = useLanguage();
+  const isEn = language === "en";
+
+  const langs = [
     {
-      name: "Português",
-      level: "Nativo",
+      name: isEn ? "Portuguese" : "Português",
+      level: isEn ? "Native" : "Nativo",
       proficiency: 100,
       flag: "🇧🇷",
-      description: "Idioma nativo com domínio completo em comunicação oral, escrita e técnica.",
-      skills: ["Comunicação Técnica", "Documentação", "Apresentações", "Redação"]
+      description: isEn
+        ? "Native language with full command of oral, written, and technical communication."
+        : "Idioma nativo com domínio completo em comunicação oral, escrita e técnica.",
+      skills: isEn
+        ? ["Technical Communication", "Documentation", "Presentations", "Writing"]
+        : ["Comunicação Técnica", "Documentação", "Apresentações", "Redação"]
     },
     {
-      name: "Inglês", 
-      level: "Intermediário/Avançado",
+      name: isEn ? "English" : "Inglês",
+      level: isEn ? "Intermediate/Advanced" : "Intermediário/Avançado",
       proficiency: 70,
       flag: "🇺🇸",
-      description: "Comunicação fluente em contextos profissionais e técnicos, com foco em desenvolvimento de software.",
+      description: isEn
+        ? "Fluent communication in professional and technical contexts, focused on software development."
+        : "Comunicação fluente em contextos profissionais e técnicos, com foco em desenvolvimento de software.",
       skills: ["Technical Writing", "Code Documentation", "Meetings", "API Documentation"]
     },
     {
-      name: "Espanhol",
-      level: "Intermediário", 
+      name: isEn ? "Spanish" : "Espanhol",
+      level: isEn ? "Intermediate" : "Intermediário",
       proficiency: 50,
       flag: "🇪🇸",
-      description: "Compreensão e escrita em contextos técnicos e comerciais, expandindo oportunidades de mercado.",
-      skills: ["Documentación Técnica", "Comprensión Textos", "Soporte Escrito", "Traducción"]
+      description: isEn
+        ? "Reading and writing in technical and business contexts, expanding market opportunities."
+        : "Compreensão e escrita em contextos técnicos e comerciais, expandindo oportunidades de mercado.",
+      skills: isEn
+        ? ["Technical Documentation", "Text Comprehension", "Written Support", "Translation"]
+        : ["Documentación Técnica", "Comprensión Textos", "Soporte Escrito", "Traducción"]
     }
   ];
 
@@ -35,15 +50,17 @@ const Languages = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Idiomas
+            {isEn ? "Languages" : "Idiomas"}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comunicação multilíngue para um mundo conectado. Fluência que quebra barreiras e conecta culturas.
+            {isEn
+              ? "Multilingual communication for a connected world. Fluency that breaks barriers and bridges cultures."
+              : "Comunicação multilingúe para um mundo conectado. Fluência que quebra barreiras e conecta culturas."}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {languages.map((lang, index) => (
+          {langs.map((lang, index) => (
             <Card 
               key={index} 
               className="group hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 border-2 hover:border-purple-500/30 bg-card/50 backdrop-blur-sm"
@@ -64,7 +81,7 @@ const Languages = () => {
 
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-muted-foreground">Proficiência</span>
+                    <span className="text-sm font-medium text-muted-foreground">{isEn ? "Proficiency" : "Proficiência"}</span>
                     <span className="text-sm font-bold text-purple-300">{lang.proficiency}%</span>
                   </div>
                   <Progress 
@@ -80,7 +97,7 @@ const Languages = () => {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 mb-3">
                     <MessageCircle className="h-4 w-4 text-purple-400" />
-                    <span className="text-sm font-medium text-purple-300">Competências</span>
+                    <span className="text-sm font-medium text-purple-300">{isEn ? "Skills" : "Competências"}</span>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-2">
@@ -98,7 +115,7 @@ const Languages = () => {
                 <div className="mt-6 pt-4 border-t border-border/50">
                   <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
                     <Globe className="h-3 w-3" />
-                    <span>Comunicação Global</span>
+                    <span>{isEn ? "Global Communication" : "Comunicação Global"}</span>
                   </div>
                 </div>
               </CardContent>
@@ -110,7 +127,7 @@ const Languages = () => {
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-purple-500/10 border border-purple-500/20">
             <Globe className="h-5 w-5 text-purple-400" />
             <span className="text-sm text-purple-300 font-medium">
-              Conectando pessoas e tecnologias através da comunicação
+              {isEn ? "Connecting people and technologies through communication" : "Conectando pessoas e tecnologias através da comunicação"}
             </span>
           </div>
         </div>
