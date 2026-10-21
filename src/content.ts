@@ -65,6 +65,7 @@ const pt = {
     scroll: "Role para decolar",
   },
   summary: {
+    photoAlt: "Eduardo trabalhando no notebook à noite, em frente a um letreiro de neon laranja",
     lead: "Tech lead em uma consultoria AI-first, com engenharia de software desde junho de 2025 concentrada em projetos de grande escala no setor aéreo.",
     body: "Levei um chatbot de autoatendimento de NLP clássico para um agente de IA generativa em produção, fui referência técnica na migração de um contact center para a nuvem e conduzi ao go-live a modernização de um sistema crítico de operações de voo. Hoje coordeno de 4 a 9 pessoas por projeto e converso direto com CTO, diretoria e a arquitetura do cliente.",
     stats: [
@@ -346,6 +347,7 @@ const en: Content = {
     scroll: "Scroll for takeoff",
   },
   summary: {
+    photoAlt: "Eduardo working on his laptop at night, in front of an orange neon sign",
     lead: "Tech lead at an AI-first consultancy, building software since June 2025, mostly on large-scale projects in the airline industry.",
     body: "I moved a self-service chatbot from classic NLP to a generative AI agent in production, was the go-to technical reference for integration in a cloud contact center migration, and took the modernization of a critical flight operations system to go-live. Today I coordinate 4 to 9 people per project and work directly with the CTO, leadership and the client's architecture team.",
     stats: [

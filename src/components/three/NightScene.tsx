@@ -4,13 +4,14 @@ import * as THREE from "three";
 import { chainSizes } from "@/content";
 import { scene } from "@/lib/scene";
 
-// Voo noturno: luzes de cidade passando embaixo, estrelas em cima e, no meio,
+// Voo noturno nas cores da foto do Eduardo: neon laranja, luz quente de janela e o azul
+// do poste. Luzes de cidade passando embaixo, estrelas em cima e, no meio,
 // a constelação dos 49 agentes, que vira 7 cadeias conforme o scroll.
 
-const AMBER = new THREE.Color("#ffb547");
-const CYAN = new THREE.Color("#7fd6f0");
-const WARM = new THREE.Color("#ffe9c9");
-const COOL = new THREE.Color("#a9d8ff");
+const NEON = new THREE.Color("#ff6a1f");
+const LAMP = new THREE.Color("#8fc6d2");
+const WARM = new THREE.Color("#ffd6a3");
+const COOL = new THREE.Color("#a6d6e0");
 
 const glowVertex = /* glsl */ `
   uniform float uTime;
@@ -90,7 +91,7 @@ function buildCity() {
   };
   const pick = () => {
     const v = r();
-    return v < 0.58 ? AMBER : v < 0.9 ? WARM : COOL;
+    return v < 0.5 ? NEON : v < 0.88 ? WARM : COOL;
   };
 
   // bairros
@@ -110,14 +111,14 @@ function buildCity() {
     const ang = (r() - 0.5) * Math.PI;
     const len = 18 + r() * 30;
     for (let d = 0; d < len; d += 0.32) {
-      push(x0 + Math.sin(ang) * d, z0 + Math.cos(ang) * d, AMBER, 9 + r() * 6);
+      push(x0 + Math.sin(ang) * d, z0 + Math.cos(ang) * d, NEON, 9 + r() * 6);
     }
   }
   // uma pista de pouso com luzes de borda e de eixo
   for (let z = -60; z < -24; z += 0.7) {
     push(-7.2, z, WARM, 16);
     push(-5.6, z, WARM, 16);
-    if (Math.round(z * 10) % 14 === 0) push(-6.4, z, AMBER, 13);
+    if (Math.round(z * 10) % 14 === 0) push(-6.4, z, NEON, 13);
   }
 
   return { pos, col, size, seed };
@@ -336,7 +337,7 @@ const Constellation = () => {
       // sem animação contínua (movimento reduzido) o destaque vai direto ao valor final
       parts.glow[i] = scene.reduced ? target : parts.glow[i] + (target - parts.glow[i]) * Math.min(dt * 6, 1);
       const g = parts.glow[i];
-      col.copy(CYAN).lerp(AMBER, g);
+      col.copy(LAMP).lerp(NEON, g);
       nodeCol[i * 3] = col.r;
       nodeCol[i * 3 + 1] = col.g;
       nodeCol[i * 3 + 2] = col.b;
@@ -359,7 +360,7 @@ const Constellation = () => {
       linePos[o + 3] = pb.x;
       linePos[o + 4] = pb.y;
       linePos[o + 5] = pb.z;
-      col.copy(CYAN).multiplyScalar(0.5).lerp(AMBER, Math.min(parts.glow[a], parts.glow[b]));
+      col.copy(LAMP).multiplyScalar(0.5).lerp(NEON, Math.min(parts.glow[a], parts.glow[b]));
       lineCol[o] = lineCol[o + 3] = col.r;
       lineCol[o + 1] = lineCol[o + 4] = col.g;
       lineCol[o + 2] = lineCol[o + 5] = col.b;
@@ -380,7 +381,7 @@ const Constellation = () => {
       pulsePos[j * 3] = tmp.x;
       pulsePos[j * 3 + 1] = tmp.y;
       pulsePos[j * 3 + 2] = tmp.z;
-      col.copy(WARM).lerp(AMBER, Math.min(parts.glow[a], parts.glow[b]));
+      col.copy(WARM).lerp(NEON, Math.min(parts.glow[a], parts.glow[b]));
       pulseCol[j * 3] = col.r;
       pulseCol[j * 3 + 1] = col.g;
       pulseCol[j * 3 + 2] = col.b;

@@ -46,9 +46,12 @@ const Contact = ({ onSceneVisible }: { onSceneVisible: (visible: boolean) => voi
     <section id="contact" className="contact" ref={root} aria-labelledby="contact-title">
       <div className="wrap">
         <p className="kicker">{t.contact.kicker}</p>
-        <h2 id="contact-title" className="contact__title display">
-          {t.contact.title}
-        </h2>
+        <div className="contact__head">
+          <img className="contact__avatar" src="/eduardo-avatar.jpg" alt="" width={240} height={240} loading="lazy" />
+          <h2 id="contact-title" className="contact__title display">
+            {t.contact.title}
+          </h2>
+        </div>
         <p className="contact__text">{t.contact.text}</p>
         <a className="contact__email" href={`mailto:${links.email}`}>
           {links.email.split("@")[0]}@
@@ -56,7 +59,7 @@ const Contact = ({ onSceneVisible }: { onSceneVisible: (visible: boolean) => voi
           {links.email.split("@")[1]}
         </a>
         <div className="contact__row">
-          <button className="btn btn--amber" type="button" onClick={copy} aria-live="polite">
+          <button className="btn btn--neon" type="button" onClick={copy} aria-live="polite">
             {copied ? <Check size={18} aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
             {copied ? t.contact.copied : t.contact.copy}
           </button>

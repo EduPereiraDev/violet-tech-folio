@@ -57,7 +57,7 @@ const Hero = () => {
         </ul>
         <div className="hero__cta">
           <a
-            className="btn btn--amber"
+            className="btn btn--neon"
             href="#work"
             onClick={(e) => {
               e.preventDefault();

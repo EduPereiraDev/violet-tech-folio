@@ -42,7 +42,7 @@ const Nav = () => {
           <button className="nav__lang" type="button" onClick={toggleLanguage} aria-label={t.nav.switchLabel}>
             {t.nav.switchTo}
           </button>
-          <a className="btn btn--amber btn--sm" href="#contact" onClick={go("contact")}>
+          <a className="btn btn--neon btn--sm" href="#contact" onClick={go("contact")}>
             {t.nav.contact}
           </a>
         </div>

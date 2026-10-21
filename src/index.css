@@ -4,23 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Voo noturno: céu azul-marinho, luzes âmbar de pista, dados em ciano.
-   As faixas de projeto são "strips" de controle de tráfego aéreo: papel claro sobre o painel escuro. */
+/* Voo noturno com a paleta da foto do Eduardo: o preto quente do vidro do prédio, o neon laranja
+   e o azul do poste. As faixas de projeto são "strips" de controle de tráfego aéreo: papel claro
+   sobre o painel escuro. */
 
 :root {
-  --sky-top: #030a1a;
-  --sky: #071529;
-  --horizon: #13294a;
-  --ink: #e9eff6;
-  --muted: #9aacc2;
-  --faint: rgba(154, 172, 194, 0.2);
-  --amber: #ffb547;
-  --amber-deep: #c98314;
-  --cyan: #7fd6f0;
-  --paper: #eef3f7;
-  --paper-ink: #0c1e33;
-  --paper-muted: #4c6075;
-  --paper-line: #c6d2dd;
+  --sky-top: #0b0605;
+  --sky: #140a07;
+  --horizon: #2c140a;
+  --ink: #f7efe9;
+  --muted: #bca99e;
+  --faint: rgba(188, 169, 158, 0.2);
+  --neon: #ff6a1f;
+  --neon-deep: #c9500f;
+  --lamp: #8fc6d2;
+  --paper: #f3f0ec;
+  --paper-ink: #1c120d;
+  --paper-muted: #5e4f46;
+  --paper-line: #dbd2ca;
   --ok: #2f8a62;
   --info: #3c6fae;
 
@@ -37,15 +38,16 @@
   --step-4: clamp(2.25rem, 1.4rem + 3.6vw, 4.25rem);
   --step-hero: clamp(4.2rem, 1rem + 13vw, 14rem);
 
-  --background: 216 72% 9%;
-  --foreground: 212 45% 94%;
-  --border: 212 25% 25%;
-  --ring: 37 100% 64%;
+  --background: 12 38% 4%;
+  --foreground: 24 52% 94%;
+  --border: 20 14% 24%;
+  --ring: 21 100% 56%;
   --radius: 4px;
 }
 
 @layer base {
   html {
+    overflow-x: clip;
     background: var(--sky-top);
     -webkit-text-size-adjust: 100%;
   }
@@ -58,7 +60,7 @@
     font-stretch: 100%;
     color: var(--ink);
     background:
-      radial-gradient(120% 60% at 50% 92%, rgba(255, 181, 71, 0.09), transparent 60%),
+      radial-gradient(120% 60% at 50% 92%, rgba(255, 106, 31, 0.09), transparent 60%),
       linear-gradient(180deg, var(--sky-top) 0%, var(--sky) 55%, var(--horizon) 100%);
     background-attachment: fixed;
     overflow-x: clip;
@@ -67,12 +69,12 @@
   }
 
   ::selection {
-    background: var(--amber);
+    background: var(--neon);
     color: var(--paper-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--amber);
+    outline: 2px solid var(--neon);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -105,14 +107,14 @@
   opacity: 0.5;
   background-image:
     radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 68% 9%, #ffe9c9 50%, transparent 51%),
+    radial-gradient(1px 1px at 68% 9%, #ffd6a3 50%, transparent 51%),
     radial-gradient(1.5px 1.5px at 85% 32%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 34% 44%, #a9d8ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 34% 44%, #a6d6e0 50%, transparent 51%),
     radial-gradient(1px 1px at 52% 71%, #fff 50%, transparent 51%),
-    radial-gradient(1.5px 1.5px at 7% 83%, #ffe9c9 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 7% 83%, #ffd6a3 50%, transparent 51%),
     radial-gradient(1px 1px at 93% 76%, #fff 50%, transparent 51%),
     radial-gradient(1px 1px at 26% 62%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 76% 55%, #a9d8ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 76% 55%, #a6d6e0 50%, transparent 51%),
     radial-gradient(1px 1px at 44% 26%, #fff 50%, transparent 51%);
   background-size: 420px 420px;
 }
@@ -130,7 +132,7 @@
   top: -4rem;
   z-index: 100;
   padding: 0.6rem 1rem;
-  background: var(--amber);
+  background: var(--neon);
   color: var(--paper-ink);
   font-weight: 700;
   text-decoration: none;
@@ -163,7 +165,7 @@ main:focus {
   gap: 0.6rem;
   font-size: var(--step--1);
   font-weight: 600;
-  color: var(--amber);
+  color: var(--neon);
   margin: 0 0 1.25rem;
 }
 .kicker::before {
@@ -194,7 +196,7 @@ main:focus {
   border-bottom: 1px solid transparent;
 }
 .nav.is-solid {
-  background: rgba(3, 10, 26, 0.72);
+  background: rgba(11, 6, 5, 0.72);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom-color: var(--faint);
@@ -215,7 +217,7 @@ main:focus {
   white-space: nowrap;
 }
 .nav__brand span {
-  color: var(--amber);
+  color: var(--neon);
 }
 .nav__links {
   display: flex;
@@ -252,7 +254,7 @@ main:focus {
   transition: border-color 0.2s, background-color 0.2s;
 }
 .nav__lang:hover {
-  border-color: var(--amber);
+  border-color: var(--neon);
 }
 @media (max-width: 860px) {
   .nav__links {
@@ -281,17 +283,17 @@ main:focus {
 .btn:active {
   transform: translateY(0);
 }
-.btn--amber {
-  background: var(--amber);
+.btn--neon {
+  background: var(--neon);
   color: var(--paper-ink);
 }
-.btn--amber:hover {
-  background: #ffc670;
+.btn--neon:hover {
+  background: #ff8a4c;
 }
 .btn--ghost {
   border-color: var(--faint);
   color: var(--ink);
-  background: rgba(3, 10, 26, 0.35);
+  background: rgba(11, 6, 5, 0.35);
 }
 .btn--ghost:hover {
   border-color: var(--ink);
@@ -317,17 +319,20 @@ main:focus {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgba(3, 10, 26, 0.7) 0%, rgba(3, 10, 26, 0.35) 45%, transparent 70%);
+  background: linear-gradient(90deg, rgba(11, 6, 5, 0.7) 0%, rgba(11, 6, 5, 0.35) 45%, transparent 70%);
   pointer-events: none;
 }
-.hero__headline,
+.hero__headline {
+  text-shadow: 0 2px 22px rgba(11, 6, 5, 0.9);
+}
+/* a única linha em neon, como o letreiro da foto */
 .hero__role {
-  text-shadow: 0 2px 22px rgba(3, 10, 26, 0.9);
+  text-shadow: 0 0 18px rgba(255, 106, 31, 0.55), 0 2px 22px rgba(11, 6, 5, 0.9);
 }
 .hero__role {
   font-size: var(--step-0);
   font-weight: 600;
-  color: var(--amber);
+  color: var(--neon);
   margin: 0 0 1.5rem;
 }
 .hero__name {
@@ -374,7 +379,7 @@ main:focus {
   border: 1px solid var(--faint);
   border-radius: 999px;
   padding: 0.35rem 0.85rem;
-  background: rgba(3, 10, 26, 0.4);
+  background: rgba(11, 6, 5, 0.4);
 }
 .hero__cta {
   display: flex;
@@ -398,7 +403,7 @@ main:focus {
   display: block;
   width: 1px;
   height: 2.75rem;
-  background: linear-gradient(var(--amber), transparent);
+  background: linear-gradient(var(--neon), transparent);
   transform-origin: top;
   animation: drop 2.2s cubic-bezier(0.6, 0, 0.3, 1) infinite;
 }
@@ -413,7 +418,7 @@ main:focus {
     padding-top: 46svh;
   }
   .hero::before {
-    background: linear-gradient(180deg, transparent 30%, rgba(3, 10, 26, 0.55) 60%, rgba(3, 10, 26, 0.7));
+    background: linear-gradient(180deg, transparent 30%, rgba(11, 6, 5, 0.55) 60%, rgba(11, 6, 5, 0.7));
   }
   .hero__headline {
     margin-top: 1.25rem;
@@ -422,6 +427,95 @@ main:focus {
 
 /* ---------- resumo ---------- */
 
+/* resumo + foto: a foto não é um card, ela sangra até a borda e se dissolve no fundo */
+@property --glow {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+.summary-section {
+  position: relative;
+  padding-block: clamp(4rem, 10vh, 8rem) clamp(6rem, 14vh, 11rem);
+}
+.summary-stage {
+  position: relative;
+  /* o zoom de parallax da foto não pode criar scroll lateral */
+  overflow: clip;
+  min-height: min(100svh, 60rem);
+  display: flex;
+  align-items: center;
+}
+/* o neon da foto vaza para a página */
+.summary-stage::before {
+  content: "";
+  position: absolute;
+  top: 5%;
+  right: 0;
+  width: 70vw;
+  height: 80%;
+  background: radial-gradient(closest-side, rgba(255, 106, 31, 0.26), rgba(255, 106, 31, 0.08) 55%, transparent);
+  opacity: var(--glow);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.summary-stage .wrap {
+  position: relative;
+  z-index: 1;
+}
+.summary__text {
+  max-width: min(56%, 42rem);
+}
+.portrait {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(54vw, 920px);
+  margin: 0;
+  pointer-events: none;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 42%),
+    linear-gradient(180deg, transparent 0%, #000 16%, #000 72%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 42%),
+    linear-gradient(180deg, transparent 0%, #000 16%, #000 72%, transparent 100%);
+  mask-composite: intersect;
+}
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% 38%;
+  will-change: transform, filter;
+}
+@media (max-width: 860px) {
+  .summary-stage {
+    display: block;
+    min-height: 0;
+  }
+  .summary-stage::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70svh;
+  }
+  .portrait {
+    position: relative;
+    width: 100%;
+    height: 74svh;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 62%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 62%, transparent 100%);
+  }
+  .portrait img {
+    object-position: 50% 40%;
+  }
+  .summary__text {
+    max-width: none;
+    margin-top: -16svh;
+  }
+}
 .summary__lead {
   font-size: var(--step-3);
   font-weight: 600;
@@ -562,7 +656,7 @@ main:focus {
   color: var(--ink);
 }
 .chain.is-active .chain__count {
-  color: var(--amber);
+  color: var(--neon);
 }
 .chain.is-active .chain__detail {
   grid-template-rows: 1fr;
@@ -583,7 +677,7 @@ main:focus {
     padding-bottom: 1.5rem;
   }
   .agents__panel {
-    background: linear-gradient(180deg, transparent, rgba(3, 10, 26, 0.88) 18%);
+    background: linear-gradient(180deg, transparent, rgba(11, 6, 5, 0.88) 18%);
     padding-top: 2.5rem;
   }
   .agents__intro,
@@ -613,11 +707,13 @@ main:focus {
   max-width: 44ch;
 }
 .board {
+  /* as faixas entram deslizando da direita; o painel recorta para não gerar scroll lateral */
+  overflow: clip;
   display: grid;
   gap: 0.9rem;
   padding: clamp(0.75rem, 2vw, 1.25rem);
   border-radius: 8px;
-  background: rgba(2, 8, 20, 0.6);
+  background: rgba(8, 4, 3, 0.6);
   border: 1px solid var(--faint);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
@@ -639,11 +735,11 @@ main:focus {
   --band-text: #1d6343;
 }
 .strip[data-status="pilot"] {
-  --band: var(--amber-deep);
-  --band-text: #7f5208;
+  --band: var(--neon-deep);
+  --band-text: #8a3c0b;
 }
 .strip[data-status="neutral"] {
-  --band: #7d8ea0;
+  --band: #9a8a7f;
   --band-text: var(--paper-muted);
 }
 .strip > * {
@@ -703,7 +799,7 @@ main:focus {
   font-weight: 600;
   padding: 0.2rem 0.55rem;
   border-radius: 2px;
-  background: #dfe7ee;
+  background: #e7dfd8;
   color: var(--paper-ink);
 }
 .strip__label {
@@ -729,7 +825,7 @@ main:focus {
 .strip__route .from {
   color: var(--paper-muted);
   text-decoration: line-through;
-  text-decoration-color: rgba(76, 96, 117, 0.5);
+  text-decoration-color: rgba(94, 79, 70, 0.5);
 }
 .strip__role {
   margin-top: auto;
@@ -814,7 +910,7 @@ main:focus {
 .build__tag {
   margin: 0.5rem 0 0;
   font-size: var(--step--1);
-  color: var(--amber);
+  color: var(--neon);
   font-weight: 600;
 }
 .build__text {
@@ -867,7 +963,7 @@ main:focus {
   top: 0.5rem;
   width: 1px;
   height: calc(100% - 0.5rem);
-  background: linear-gradient(var(--amber), var(--cyan));
+  background: linear-gradient(var(--neon), var(--lamp));
   transform-origin: top;
   transform: scaleY(0);
 }
@@ -899,9 +995,9 @@ main:focus {
   border: 2px solid var(--muted);
 }
 .stop.is-current .stop__body::before {
-  border-color: var(--amber);
-  background: var(--amber);
-  box-shadow: 0 0 0 6px rgba(255, 181, 71, 0.16);
+  border-color: var(--neon);
+  background: var(--neon);
+  box-shadow: 0 0 0 6px rgba(255, 106, 31, 0.16);
 }
 .stop__role {
   font-size: var(--step-2);
@@ -931,7 +1027,7 @@ main:focus {
   top: 0.72em;
   width: 0.45rem;
   height: 1px;
-  background: var(--amber);
+  background: var(--neon);
 }
 @media (max-width: 760px) {
   .timeline::before,
@@ -986,7 +1082,7 @@ main:focus {
   padding: 1rem;
   border: 1px solid var(--faint);
   border-radius: 6px;
-  background: rgba(3, 10, 26, 0.45);
+  background: rgba(11, 6, 5, 0.45);
 }
 .cert img,
 .cert__mark {
@@ -1014,7 +1110,7 @@ main:focus {
   color: var(--muted);
 }
 .cert__meta a {
-  color: var(--amber);
+  color: var(--neon);
   text-underline-offset: 3px;
 }
 .certs__others {
@@ -1063,13 +1159,26 @@ main:focus {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(3, 10, 26, 0.55), transparent 35%, transparent 60%, rgba(3, 10, 26, 0.75));
+  background: linear-gradient(180deg, rgba(11, 6, 5, 0.55), transparent 35%, transparent 60%, rgba(11, 6, 5, 0.75));
   pointer-events: none;
 }
 .contact__title,
 .contact__text,
 .contact__email {
-  text-shadow: 0 2px 26px rgba(3, 10, 26, 0.95);
+  text-shadow: 0 2px 26px rgba(11, 6, 5, 0.95);
+}
+.contact__head {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+.contact__avatar {
+  width: clamp(3.5rem, 2rem + 5vw, 5.5rem);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px var(--neon), 0 0 32px rgba(255, 106, 31, 0.55);
 }
 .contact__title {
   font-size: var(--step-4);
@@ -1096,9 +1205,9 @@ main:focus {
   padding-bottom: 0.12em;
 }
 .contact__email:hover {
-  color: var(--amber);
+  color: var(--neon);
   background-size: 100% 3px;
-  background-image: linear-gradient(90deg, var(--amber), var(--amber));
+  background-image: linear-gradient(90deg, var(--neon), var(--neon));
 }
 .contact__row {
   display: flex;
