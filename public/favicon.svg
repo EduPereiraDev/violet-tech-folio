@@ -1,10 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- "E." da marca: E largo e pesado como o Archivo expandido do site, ponto em neon laranja -->
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#A855F7;stop-opacity:1" />
-    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.74" r="0.45">
+      <stop offset="0" stop-color="#ff6a1f" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#ff6a1f" stop-opacity="0" />
+    </radialGradient>
   </defs>
-  <rect width="100" height="100" rx="20" fill="url(#grad)"/>
-  <text x="50" y="65" font-family="monospace" font-size="45" font-weight="bold" fill="white" text-anchor="middle">&lt;/&gt;</text>
+  <rect width="64" height="64" rx="14" fill="#0b0605" />
+  <rect width="64" height="64" rx="14" fill="url(#glow)" />
+  <g fill="#f7efe9">
+    <rect x="11" y="13" width="11" height="38" />
+    <rect x="11" y="13" width="31" height="10" />
+    <rect x="11" y="27.5" width="27" height="9" />
+    <rect x="11" y="41" width="31" height="10" />
+  </g>
+  <circle cx="51.5" cy="45.5" r="5.5" fill="#ff6a1f" />
 </svg>
