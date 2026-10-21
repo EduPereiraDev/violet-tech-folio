@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { chainSizes } from "@/content";
 import { scene } from "@/lib/scene";
-import { CAMERA_START, COOL, LAMP, makeGlowMaterial, NEON, smooth, WARM } from "./glow";
+import { CAMERA_START, COOL, LAMP, makeGlowMaterial, NEON, smooth, TOUCH, WARM } from "./glow";
 import NameParticles from "./NameParticles";
 
 // Voo noturno nas cores da foto do Eduardo: neon laranja, luz quente de janela e o azul
@@ -28,6 +28,8 @@ function buildCity() {
   const size: number[] = [];
   const seed: number[] = [];
   const push = (x: number, z: number, c: THREE.Color, s: number) => {
+    // no toque fica pouco mais da metade das luzes; a cidade continua com a mesma cara
+    if (TOUCH && r() > 0.55) return;
     pos.push(x, -2.6, z);
     col.push(c.r, c.g, c.b);
     size.push(s);
@@ -74,7 +76,7 @@ function buildStars() {
   const col: number[] = [];
   const size: number[] = [];
   const seed: number[] = [];
-  for (let i = 0; i < 1400; i++) {
+  for (let i = 0; i < (TOUCH ? 700 : 1400); i++) {
     const theta = r() * Math.PI * 2;
     const y = 0.05 + r() * 0.95;
     const rad = Math.sqrt(1 - y * y);
@@ -405,6 +407,101 @@ const CameraRig = () => {
   return null;
 };
 
+// Resolução adaptativa. A GPU do celular é quem limita: com o canvas lento, o nome que acompanha
+// o scroll engasga. O nível fica no estado do NightScene e vai para o <Canvas dpr>, porque o R3F
+// reaplica a prop dpr a cada render e desfaria um setDpr direto no store.
+const DPR_LEVELS = [1, 0.8, 0.65, 0.5];
+
+const AdaptiveDpr = ({ level, onLevel }: { level: number; onLevel: (level: number) => void }) => {
+  const acc = useRef({
+    time: 0,
+    frames: 0,
+    warmup: 2,
+    bad: 0,
+    good: 0,
+    /** fps das janelas ruins seguidas, para comparar com uma média e não com uma janela só */
+    badFps: [] as number[],
+    recovered: false,
+    locked: false,
+    /** depois de baixar, confere se adiantou; se não, o gargalo não é a GPU (ex.: economia de bateria a 30 fps) */
+    probe: null as null | { from: number; before: number; skip: boolean; samples: number[] },
+  });
+
+  useFrame((_, dt) => {
+    const a = acc.current;
+    if (dt > 0.5) {
+      // aba voltando do fundo ou cena religada: os primeiros frames não contam
+      a.warmup = 1.5;
+      a.time = 0;
+      a.frames = 0;
+      return;
+    }
+    if (a.warmup > 0) {
+      a.warmup -= dt;
+      return;
+    }
+    a.time += dt;
+    a.frames++;
+    if (a.time < 1) return;
+    const fps = a.frames / a.time;
+    a.time = 0;
+    a.frames = 0;
+
+    if (a.probe) {
+      // a primeira janela depois da troca inclui a realocação do canvas: não conta
+      if (a.probe.skip) {
+        a.probe.skip = false;
+        return;
+      }
+      a.probe.samples.push(fps);
+      if (a.probe.samples.length < 3) return;
+      const n = a.probe.samples.length;
+      const mean = a.probe.samples.reduce((x, y) => x + y, 0) / n;
+      const sd = Math.sqrt(a.probe.samples.reduce((x, y) => x + (y - mean) ** 2, 0) / n);
+      // só desfaz quando a falta de ganho é clara e estável (ex.: limite de 30 fps da bateria);
+      // com FPS oscilando, o ganho é ambíguo e o nível novo fica
+      if (mean <= a.probe.before * 1.05 && sd < mean * 0.1) {
+        onLevel(a.probe.from);
+        a.locked = true;
+      }
+      a.probe = null;
+      return;
+    }
+    if (a.locked) return;
+
+    if (fps < 45) {
+      a.bad++;
+      a.badFps.push(fps);
+      if (a.badFps.length > 3) a.badFps.shift();
+      a.good = 0;
+    } else if (fps > 57) {
+      a.good++;
+      a.bad = 0;
+      a.badFps = [];
+    } else {
+      a.bad = 0;
+      a.badFps = [];
+      a.good = 0;
+    }
+
+    // só baixa com 3 janelas ruins seguidas: uma travada passageira não derruba a qualidade
+    if (a.bad >= 3 && level < DPR_LEVELS.length - 1) {
+      const before = a.badFps.slice(-3).reduce((x, y) => x + y, 0) / Math.min(a.badFps.length, 3);
+      a.bad = 0;
+      a.badFps = [];
+      // se já tinha subido uma vez e voltou a pesar, este é o nível certo: para de oscilar
+      if (a.recovered) a.locked = true;
+      a.probe = { from: level, before, skip: true, samples: [] };
+      onLevel(level + 1);
+    } else if (a.good >= 8 && level > 0 && !a.recovered) {
+      a.good = 0;
+      a.recovered = true;
+      onLevel(level - 1);
+    }
+  });
+  return null;
+};
+
 // Com movimento reduzido a cena é estática: só redesenha quando o scroll muda o estado.
 const RedrawOnScroll = () => {
   const invalidate = useThree((s) => s.invalidate);
@@ -416,22 +513,28 @@ const RedrawOnScroll = () => {
   return null;
 };
 
-const NightScene = ({ active }: { active: boolean }) => (
-  <Canvas
-    frameloop={!active ? "never" : scene.reduced ? "demand" : "always"}
-    dpr={[1, 1.75]}
-    camera={{ fov: CAMERA_START.fov, near: 0.1, far: 200, position: [0, CAMERA_START.y, CAMERA_START.z] }}
-    gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
-    // o canvas monta dentro de um Suspense; um resize garante a medida certa no primeiro frame
-    onCreated={() => requestAnimationFrame(() => window.dispatchEvent(new Event("resize")))}
-  >
-    <CameraRig />
-    <Stars />
-    <City />
-    <Constellation />
-    <NameParticles />
-    {scene.reduced && <RedrawOnScroll />}
-  </Canvas>
-);
+const NightScene = ({ active }: { active: boolean }) => {
+  const [level, setLevel] = useState(0);
+  const base = Math.min(Math.max(window.devicePixelRatio || 1, 1), TOUCH ? 1.25 : 1.75);
+  const dpr = Math.max(0.6, base * DPR_LEVELS[level]);
+
+  return (
+    <Canvas
+      frameloop={!active ? "never" : scene.reduced ? "demand" : "always"}
+      dpr={dpr}
+      camera={{ fov: CAMERA_START.fov, near: 0.1, far: 200, position: [0, CAMERA_START.y, CAMERA_START.z] }}
+      gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
+      // o canvas monta dentro de um Suspense; um resize garante a medida certa no primeiro frame
+      onCreated={() => requestAnimationFrame(() => window.dispatchEvent(new Event("resize")))}
+    >
+      <CameraRig />
+      <Stars />
+      <City />
+      <Constellation />
+      <NameParticles />
+      {scene.reduced ? <RedrawOnScroll /> : <AdaptiveDpr level={level} onLevel={setLevel} />}
+    </Canvas>
+  );
+};
 
 export default NightScene;

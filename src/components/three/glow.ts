@@ -2,6 +2,9 @@ import * as THREE from "three";
 
 // Peças compartilhadas da cena: cores da foto do Eduardo e o material de "luz" (pontos com brilho aditivo).
 
+/** Celular/tablet: a GPU é bem mais fraca, então a cena desenha menos e menor. */
+export const TOUCH = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+
 export const NEON = new THREE.Color("#ff6a1f");
 export const LAMP = new THREE.Color("#8fc6d2");
 export const WARM = new THREE.Color("#ffd6a3");
@@ -14,6 +17,7 @@ const glowVertex = /* glsl */ `
   uniform float uPixelRatio;
   uniform float uScale;
   uniform float uFade;
+  uniform float uMaxSize;
   attribute float aSize;
   attribute float aSeed;
   attribute vec3 aColor;
@@ -29,7 +33,7 @@ const glowVertex = /* glsl */ `
     float fade = uMove > 0.5 ? smoothstep(92.0, 28.0, dist) * smoothstep(1.0, 5.0, dist) : 1.0;
     vAlpha = fade * twinkle * uFade;
     vColor = aColor;
-    gl_PointSize = min(aSize * uPixelRatio * uScale / max(dist, 0.1), 64.0);
+    gl_PointSize = min(aSize * uPixelRatio * uScale / max(dist, 0.1), uMaxSize);
   }
 `;
 
@@ -52,6 +56,7 @@ export const makeGlowMaterial = (move: boolean, scale: number) =>
       uPixelRatio: { value: 1 },
       uScale: { value: scale },
       uFade: { value: 1 },
+      uMaxSize: { value: TOUCH ? 22 : 64 },
     },
     vertexShader: glowVertex,
     fragmentShader: glowFragment,

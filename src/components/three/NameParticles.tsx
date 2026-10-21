@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { gsap } from "gsap";
 import { scene } from "@/lib/scene";
 import { CAMERA_START, makeGlowMaterial, NEON, smooth, WARM } from "./glow";
 
@@ -13,16 +14,18 @@ const POINT_SCALE = 10;
 
 type Target = { x: number; y: number; step: number };
 
-/** Desenha cada linha do nome num canvas 2D com a mesma fonte do DOM e amostra os pixels. */
-/** Topo do bloco do hero no documento, sem transform: base para seguir o parallax dele. */
-let innerTop0 = 0;
+/** Bloco do hero e sua altura sem transform: o parallax dele é lido do GSAP, sem medir o layout. */
+let innerEl: HTMLElement | null = null;
+let innerH0 = 0;
 
+/** Desenha cada linha do nome num canvas 2D com a mesma fonte do DOM e amostra os pixels. */
 function sampleName(maxPoints: number): Target[] {
   // o GSAP move o .hero__inner (parallax); a medida tem que ser da posição sem transform
   const inner = document.querySelector<HTMLElement>(".hero__inner");
   const savedTransform = inner?.style.transform ?? "";
   if (inner) inner.style.transform = "none";
-  innerTop0 = (inner?.getBoundingClientRect().top ?? 0) + window.scrollY;
+  innerEl = inner;
+  innerH0 = inner?.getBoundingClientRect().height ?? 0;
   const spans = Array.from(document.querySelectorAll<HTMLElement>(".hero__line > span"));
   const layers = spans.map((span) => {
     const range = document.createRange();
@@ -104,7 +107,7 @@ const NameParticles = () => {
       // o fallback de texto já entrou (cena atrasada): não some com o nome de novo
       if (!scene.particleName) return;
       const mobile = size.width < 760;
-      const points = sampleName(mobile ? 4500 : 11000);
+      const points = sampleName(mobile ? 3000 : 11000);
       if (!points.length) return;
 
       // a mesma câmera do topo da página: o ponto na tela vira um ponto no plano z = 0
@@ -235,9 +238,16 @@ const NameParticles = () => {
     const tanH = Math.tan(THREE.MathUtils.degToRad(persp.fov / 2));
     const aspect = size.width / size.height;
     const cx = e[12], cy = e[13], cz = e[14];
-    // a página sobe com o scroll e o bloco do hero ainda tem parallax: segue os dois
-    const innerEl = document.querySelector<HTMLElement>(".hero__inner");
-    const shift = innerEl ? innerEl.getBoundingClientRect().top + window.scrollY - innerTop0 : 0;
+    // a página sobe com o scroll e o bloco do hero ainda tem parallax: segue os dois.
+    // O deslocamento vem do valor que o GSAP guarda; medir o layout aqui (getBoundingClientRect,
+    // logo depois do GSAP escrever o transform) forçava reflow a cada frame e travava o nome no celular.
+    if (!innerEl?.isConnected) {
+      innerEl = document.querySelector<HTMLElement>(".hero__inner");
+      if (innerEl) innerH0 = innerEl.offsetHeight;
+    }
+    const shift = innerEl
+      ? (Number(gsap.getProperty(innerEl, "yPercent")) / 100) * innerH0 + Number(gsap.getProperty(innerEl, "y"))
+      : 0;
     const scrollY = window.scrollY - shift;
 
     let done = true;

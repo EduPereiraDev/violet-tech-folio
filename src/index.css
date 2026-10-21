@@ -201,6 +201,14 @@ main:focus {
   -webkit-backdrop-filter: blur(14px);
   border-bottom-color: var(--faint);
 }
+/* no toque o vidro fosco sai: o blur sobre o canvas 3D era refeito a cada frame da cena */
+@media (pointer: coarse) {
+  .nav.is-solid {
+    background: rgba(11, 6, 5, 0.92);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
 .nav__bar {
   display: flex;
   align-items: center;
@@ -460,7 +468,6 @@ main:focus {
   height: 80%;
   background: radial-gradient(closest-side, rgba(255, 106, 31, 0.26), rgba(255, 106, 31, 0.08) 55%, transparent);
   opacity: var(--glow);
-  filter: blur(40px);
   pointer-events: none;
 }
 .summary-stage .wrap {
@@ -493,7 +500,7 @@ main:focus {
   height: 100%;
   object-fit: cover;
   object-position: 55% 38%;
-  will-change: transform, filter;
+  will-change: transform;
 }
 @media (max-width: 860px) {
   .summary-stage {
