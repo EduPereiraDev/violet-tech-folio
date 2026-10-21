@@ -1,126 +1,35 @@
-# Violet Tech Portfolio
+# edupereiradev.netlify.app
 
-## Sobre
+Portfólio do **Eduardo Pereira dos Santos**, Líder Técnico (Tech Lead) e AI Engineer.
 
-Portfólio profissional do **Eduardo Pereira**, desenvolvedor Full Stack especializado em soluções digitais modernas, desenvolvimento web, inteligência artificial e experiência do usuário.
+O site é um voo noturno: luzes de cidade passando embaixo e, no céu, a constelação dos 49 agentes do sistema multiagente. Conforme o scroll, a constelação vira as 7 cadeias, os projetos entram como faixas de controle de tráfego aéreo e o contato fecha com o pouso.
 
-## Características
+## Stack
 
-- **Design moderno** com tema dark e acentos roxos/violetas
-- **Animações fluidas** com Framer Motion
-- **Texto animado rotativo** na seção Hero
-- **Responsivo** para todos os dispositivos
-- **Performance otimizada** com Vite
-- **Tipagem completa** com TypeScript
-- **Componentes reutilizáveis** com shadcn/ui
+- React 18, TypeScript e Vite
+- Three.js com @react-three/fiber (cena em `src/components/three/NightScene.tsx`, carregada sob demanda)
+- GSAP ScrollTrigger e Lenis para o scroll
+- Archivo Variable (eixo de largura) como única família tipográfica
+- Tailwind só para utilitários; o design system está em `src/index.css`
 
-## Tecnologias
+## Conteúdo
 
-- **Frontend**: React 18, TypeScript, Vite
-- **UI Framework**: shadcn/ui (Radix UI + Tailwind CSS)
-- **Animações**: Framer Motion
-- **Ícones**: Lucide React
-- **Estilização**: Tailwind CSS
-- **Build**: Vite
-- **Lint**: ESLint
+Todo o texto, em português e inglês, fica em `src/content.ts`. A fonte da verdade é o CV-mestre (`~/Projetos/carreira/cv/cv-mestre.md`): nada entra no site sem evidência lá, e nenhum cliente é citado pelo nome.
 
-## Instalação e Uso
+Para mandar o link já em inglês: `https://edupereiradev.netlify.app/?lang=en`.
 
-### Pré-requisitos
-- Node.js 18+ 
-- npm ou yarn
-
-### Instalação
+## Rodar
 
 ```bash
-# Clone o repositório
-git clone https://github.com/EduPereiraDev/violet-tech-folio.git
-
-# Entre no diretório
-cd violet-tech-folio
-
-# Instale as dependências
 npm install
-
-# Inicie o servidor de desenvolvimento
 npm run dev
 ```
-
-### Scripts Disponíveis
 
 ```bash
-# Desenvolvimento
-npm run dev
-
-# Build para produção
 npm run build
-
-# Preview da build
 npm run preview
-
-# Lint
-npm run lint
 ```
 
-## Estrutura do Projeto
+## Deploy
 
-```
-src/
-├── components/          # Componentes React
-│   ├── Hero.tsx        # Seção principal com animação
-│   ├── About.tsx       # Sobre o desenvolvedor
-│   ├── Skills.tsx      # Habilidades técnicas
-│   ├── Projects.tsx    # Portfólio de projetos
-│   ├── Contact.tsx     # Formulário de contato
-│   └── ui/             # Componentes base shadcn/ui
-├── pages/              # Páginas da aplicação
-├── hooks/              # Custom hooks
-└── lib/                # Utilitários
-```
-
-## Seções do Portfolio
-
-1. **Hero** - Apresentação com texto animado rotativo
-2. **About** - Especialidades e habilidades
-3. **Skills** - Tecnologias com ícones
-4. **AI** - Seção dedicada à Inteligência Artificial
-5. **Projects** - Projetos em destaque
-6. **Contact** - Formulário funcional de contato
-
-## Responsividade
-
-- **Mobile First** - Design otimizado para dispositivos móveis
-- **Breakpoints** - sm, md, lg, xl, 2xl
-- **Layout flexível** - Adapta-se a qualquer tamanho de tela
-
-## Funcionalidades Especiais
-
-### Texto Animado no Hero
-- Rotação automática entre: Full Stack, Front Stack, Back Stack, AI Stack, Web Stack
-- Animação suave com Framer Motion
-- Interval de 2.5 segundos
-
-### Formulário de Contato
-- Validação de campos obrigatórios
-- Integração com cliente de email via mailto
-- Feedback visual com toast notifications
-
-### Skills com Ícones
-- Substituição de barras de progresso por ícones representativos
-- Organizadas por categorias
-- Efeitos hover interativos
-
-## Links Importantes
-
-- **Portfolio**: [Em breve]
-- **GitHub**: [@EduPereiraDev](https://github.com/EduPereiraDev)
-- **LinkedIn**: [Eduardo Pereira](https://www.linkedin.com/in/eduardo-pereira-dos-santos-035311320)
-- **Email**: pereirassantosedu@gmail.com
-
-## Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
-**Desenvolvido com 💜 por Eduardo Pereira**
+Netlify, com `netlify.toml` (Node 22, `npm run build`, publica `dist`).
