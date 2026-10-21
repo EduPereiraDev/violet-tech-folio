@@ -21,8 +21,9 @@ const Hero = () => {
       if (scene.reduced) return;
 
       const intro = gsap.timeline({ defaults: { ease: "expo.out" } });
+      // com o nome em partículas, quem anima as letras é a cena 3D
+      if (!scene.particleName) intro.from(".hero__line > span", { yPercent: 110, duration: 1.4, stagger: 0.12 }, 0.15);
       intro
-        .from(".hero__line > span", { yPercent: 110, duration: 1.4, stagger: 0.12 }, 0.15)
         .from(".hero__role", { opacity: 0, y: 16, duration: 1 }, 0.35)
         .from(".hero__headline, .hero__facts li, .hero__cta > *", { opacity: 0, y: 24, duration: 1.1, stagger: 0.06 }, 0.7)
         .from(".hero__scroll", { opacity: 0, duration: 1 }, 1.3);

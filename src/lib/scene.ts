@@ -13,7 +13,15 @@ export const scene = {
   /** 0 → 1 no contato: a cena volta e o voo pousa */
   landing: 0,
   pointer: { x: 0, y: 0 },
+  /** só empurra as letras depois que o mouse (ou o dedo) se mexe de verdade */
+  pointerActive: false,
   reduced: false,
+  /** o nome do hero é desenhado por partículas (WebGL ok e sem movimento reduzido) */
+  particleName: false,
+  /** as partículas do nome já começaram a voar */
+  nameStarted: false,
+  /** posição no mundo dos 49 nós da constelação, para as letras escorrerem até eles */
+  nodeWorld: new Float32Array(49 * 3),
 };
 
 export const prefersReducedMotion = () =>

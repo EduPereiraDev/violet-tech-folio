@@ -3,68 +3,12 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { chainSizes } from "@/content";
 import { scene } from "@/lib/scene";
+import { CAMERA_START, COOL, LAMP, makeGlowMaterial, NEON, smooth, WARM } from "./glow";
+import NameParticles from "./NameParticles";
 
 // Voo noturno nas cores da foto do Eduardo: neon laranja, luz quente de janela e o azul
 // do poste. Luzes de cidade passando embaixo, estrelas em cima e, no meio,
 // a constelação dos 49 agentes, que vira 7 cadeias conforme o scroll.
-
-const NEON = new THREE.Color("#ff6a1f");
-const LAMP = new THREE.Color("#8fc6d2");
-const WARM = new THREE.Color("#ffd6a3");
-const COOL = new THREE.Color("#a6d6e0");
-
-const glowVertex = /* glsl */ `
-  uniform float uTime;
-  uniform float uTravel;
-  uniform float uMove;
-  uniform float uPixelRatio;
-  uniform float uScale;
-  uniform float uFade;
-  attribute float aSize;
-  attribute float aSeed;
-  attribute vec3 aColor;
-  varying vec3 vColor;
-  varying float vAlpha;
-  void main() {
-    vec3 p = position;
-    if (uMove > 0.5) p.z = mod(p.z + uTravel, 100.0) - 90.0;
-    vec4 mv = modelViewMatrix * vec4(p, 1.0);
-    gl_Position = projectionMatrix * mv;
-    float dist = -mv.z;
-    float twinkle = 0.7 + 0.3 * sin(uTime * (0.8 + aSeed * 2.4) + aSeed * 50.0);
-    float fade = uMove > 0.5 ? smoothstep(92.0, 28.0, dist) * smoothstep(1.0, 5.0, dist) : 1.0;
-    vAlpha = fade * twinkle * uFade;
-    vColor = aColor;
-    gl_PointSize = min(aSize * uPixelRatio * uScale / max(dist, 0.1), 64.0);
-  }
-`;
-
-const glowFragment = /* glsl */ `
-  varying vec3 vColor;
-  varying float vAlpha;
-  void main() {
-    float d = length(gl_PointCoord - 0.5);
-    float glow = pow(smoothstep(0.5, 0.0, d), 2.2);
-    gl_FragColor = vec4(vColor * glow * 1.5, glow * vAlpha);
-  }
-`;
-
-const makeGlowMaterial = (move: boolean, scale: number) =>
-  new THREE.ShaderMaterial({
-    uniforms: {
-      uTime: { value: 0 },
-      uTravel: { value: 0 },
-      uMove: { value: move ? 1 : 0 },
-      uPixelRatio: { value: 1 },
-      uScale: { value: scale },
-      uFade: { value: 1 },
-    },
-    vertexShader: glowVertex,
-    fragmentShader: glowFragment,
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-  });
 
 // Gerador determinístico: a cidade é sempre a mesma a cada visita.
 const rng = (seed: number) => () => {
@@ -247,10 +191,6 @@ function buildGraph(): Graph {
   return { count, chainOf, sphere, chains, edges };
 }
 
-const smooth = (a: number, b: number, x: number) => {
-  const t = Math.min(Math.max((x - a) / (b - a), 0), 1);
-  return t * t * (3 - 2 * t);
-};
 
 const PULSES = 28;
 
@@ -390,7 +330,10 @@ const Constellation = () => {
     parts.pulseGeo.attributes.aColor.needsUpdate = true;
 
     // no celular a constelação fica atrás do texto: some depois do hero e volta para os agentes
-    const fade = (mobile ? Math.max(1 - scene.hero * 0.85, form) : 1) * (1 - scene.landing);
+    // com o nome em partículas, a constelação nasce das letras conforme o scroll; no celular ela
+    // fica atrás do texto e só volta para os agentes
+    const heroFade = scene.particleName ? smooth(0.3, 0.85, scene.hero) : 1;
+    const fade = (mobile ? Math.max(scene.particleName ? 0 : 1 - scene.hero * 0.85, form) : Math.max(heroFade, form)) * (1 - scene.landing);
     for (const m of [parts.nodeMat, parts.pulseMat]) {
       m.uniforms.uTime.value = time;
       m.uniforms.uPixelRatio.value = dpr;
@@ -417,6 +360,15 @@ const Constellation = () => {
       const py = scene.reduced ? 0 : scene.pointer.y;
       inner.current.rotation.y += (px * 0.35 - inner.current.rotation.y) * Math.min(dt * 3, 1);
       inner.current.rotation.x += (-py * 0.25 + (1 - a) * 0.15 - inner.current.rotation.x) * Math.min(dt * 3, 1);
+
+      // posição no mundo de cada nó, para as letras do hero escorrerem até eles
+      inner.current.updateWorldMatrix(true, false);
+      for (let i = 0; i < graph.count; i++) {
+        tmp.copy(parts.current[i]).applyMatrix4(inner.current.matrixWorld);
+        scene.nodeWorld[i * 3] = tmp.x;
+        scene.nodeWorld[i * 3 + 1] = tmp.y;
+        scene.nodeWorld[i * 3 + 2] = tmp.z;
+      }
     }
   });
 
@@ -443,10 +395,12 @@ const CameraRig = () => {
     const a = smooth(0, 0.2, scene.agents);
     // no pouso a câmera desce e volta a olhar para o horizonte
     const e = scene.exit * (1 - scene.landing);
-    const y = 0.5 - scene.hero * 0.25 + e * 1.5;
-    camera.position.set(0, THREE.MathUtils.lerp(y, -0.6, scene.landing), 7.6 - scene.hero * 0.5);
-    look.set(0, THREE.MathUtils.lerp(THREE.MathUtils.lerp(1.35, 0.6, a) + e * 3.2, 0.9, scene.landing), 0);
+    const y = CAMERA_START.y - scene.hero * 0.25 + e * 1.5;
+    camera.position.set(0, THREE.MathUtils.lerp(y, -0.6, scene.landing), CAMERA_START.z - scene.hero * 0.5);
+    look.set(0, THREE.MathUtils.lerp(THREE.MathUtils.lerp(CAMERA_START.lookY, 0.6, a) + e * 3.2, 0.9, scene.landing), 0);
     camera.lookAt(look);
+    // o nome em partículas projeta a partir desta câmera no mesmo frame
+    camera.updateMatrixWorld();
   });
   return null;
 };
@@ -466,15 +420,16 @@ const NightScene = ({ active }: { active: boolean }) => (
   <Canvas
     frameloop={!active ? "never" : scene.reduced ? "demand" : "always"}
     dpr={[1, 1.75]}
-    camera={{ fov: 45, near: 0.1, far: 200, position: [0, 0.5, 7.6] }}
+    camera={{ fov: CAMERA_START.fov, near: 0.1, far: 200, position: [0, CAMERA_START.y, CAMERA_START.z] }}
     gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
     // o canvas monta dentro de um Suspense; um resize garante a medida certa no primeiro frame
     onCreated={() => requestAnimationFrame(() => window.dispatchEvent(new Event("resize")))}
   >
+    <CameraRig />
     <Stars />
     <City />
     <Constellation />
-    <CameraRig />
+    <NameParticles />
     {scene.reduced && <RedrawOnScroll />}
   </Canvas>
 );

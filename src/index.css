@@ -339,6 +339,11 @@ main:focus {
   font-size: var(--step-hero);
   margin: 0;
   text-transform: none;
+  transition: opacity 0.6s;
+}
+/* o texto continua no DOM (leitor de tela, busca, seleção); quem desenha é a cena 3D */
+.particle-name .hero__name {
+  opacity: 0;
 }
 .hero__line {
   display: block;

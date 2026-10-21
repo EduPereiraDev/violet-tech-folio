@@ -20,6 +20,11 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
   static getDerivedStateFromError() {
     return { failed: true };
   }
+  componentDidCatch() {
+    // sem cena, o nome volta a ser texto
+    scene.particleName = false;
+    document.documentElement.classList.remove("particle-name");
+  }
   render() {
     return this.state.failed ? null : this.props.children;
   }
@@ -36,8 +41,19 @@ const Index = () => {
     const onPointer = (e: PointerEvent) => {
       scene.pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
       scene.pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+      scene.pointerActive = true;
+    };
+    // no toque, o dedo sai da tela: a letra não pode ficar furada
+    const onRelease = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") scene.pointerActive = false;
+    };
+    const onLeave = () => {
+      scene.pointerActive = false;
     };
     window.addEventListener("pointermove", onPointer, { passive: true });
+    window.addEventListener("pointerup", onRelease, { passive: true });
+    window.addEventListener("pointercancel", onRelease, { passive: true });
+    document.documentElement.addEventListener("pointerleave", onLeave);
 
     // fontes e imagens mudam alturas depois do primeiro layout
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
@@ -45,6 +61,9 @@ const Index = () => {
     return () => {
       stop?.();
       window.removeEventListener("pointermove", onPointer);
+      window.removeEventListener("pointerup", onRelease);
+      window.removeEventListener("pointercancel", onRelease);
+      document.documentElement.removeEventListener("pointerleave", onLeave);
     };
   }, []);
 
