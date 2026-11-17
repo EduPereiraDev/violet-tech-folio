@@ -11,6 +11,7 @@ export const links = {
   github: "https://github.com/EduPereiraDev",
   credlySecurity: "https://www.credly.com/badges/37cdb65e-9600-4dd4-a9b1-ab5a5dc38f67/linked_in",
   credlyDeveloper: "https://www.credly.com/badges/32b82b1c-79b5-4078-9eec-f1a16cabc0be/linked_in",
+  credlyMlEngineer: "https://www.credly.com/badges/36f79f5c-1eb8-4b61-94f1-ee30511d7dcf",
   financial: "https://github.com/EduPereiraDev/financial-project",
 };
 
@@ -58,7 +59,7 @@ const pt = {
     facts: [
       "AI Engineer e sistemas multiagente",
       ".NET, Node.js e Python",
-      "AWS Certified Security – Specialty",
+      "Google Cloud ML Engineer e AWS Security",
     ],
     ctaWork: "Ver projetos",
     ctaContact: "Falar comigo",
@@ -72,7 +73,7 @@ const pt = {
       { value: "49", label: "agentes no sistema multiagente que criei" },
       { value: "163", label: "ações de negócio ligadas a um agente de IA" },
       { value: "638", label: "testes unitários no go-live de um sistema de voo" },
-      { value: "2", label: "certificações AWS, incluindo Security – Specialty" },
+      { value: "3", label: "certificações Google Cloud e AWS, incluindo ML Engineer" },
     ],
   },
   agents: {
@@ -287,6 +288,7 @@ const pt = {
     kicker: "Certificações",
     verify: "Verificar no Credly",
     main: [
+      { name: "Google Cloud Professional Machine Learning Engineer", issuer: "Google Cloud", date: "nov 2026", img: "/google-cloud-ml-engineer.png", href: links.credlyMlEngineer },
       { name: "AWS Certified Security – Specialty", issuer: "Amazon Web Services", date: "mar 2026", img: "/aws-security-specialty.png", href: links.credlySecurity },
       { name: "AWS Certified Developer – Associate", issuer: "Amazon Web Services", date: "dez 2025", img: "/aws-developer-associate.png", href: links.credlyDeveloper },
       { name: "OCI 2025 Certified Foundations Associate", issuer: "Oracle", date: "out 2025", img: null as string | null, href: null as string | null },
@@ -340,7 +342,7 @@ const en: Content = {
     facts: [
       "AI Engineer and multi-agent systems",
       ".NET, Node.js and Python",
-      "AWS Certified Security – Specialty",
+      "Google Cloud ML Engineer and AWS Security",
     ],
     ctaWork: "See the work",
     ctaContact: "Get in touch",
@@ -354,7 +356,7 @@ const en: Content = {
       { value: "49", label: "agents in the multi-agent system I built" },
       { value: "163", label: "business actions wired to an AI agent" },
       { value: "638", label: "unit tests at a flight system go-live" },
-      { value: "2", label: "AWS certifications, including Security – Specialty" },
+      { value: "3", label: "Google Cloud and AWS certifications, including ML Engineer" },
     ],
   },
   agents: {
@@ -569,6 +571,7 @@ const en: Content = {
     kicker: "Certifications",
     verify: "Verify on Credly",
     main: [
+      { name: "Google Cloud Professional Machine Learning Engineer", issuer: "Google Cloud", date: "Nov 2026", img: "/google-cloud-ml-engineer.png", href: links.credlyMlEngineer },
       { name: "AWS Certified Security – Specialty", issuer: "Amazon Web Services", date: "Mar 2026", img: "/aws-security-specialty.png", href: links.credlySecurity },
       { name: "AWS Certified Developer – Associate", issuer: "Amazon Web Services", date: "Dec 2025", img: "/aws-developer-associate.png", href: links.credlyDeveloper },
       { name: "OCI 2025 Certified Foundations Associate", issuer: "Oracle", date: "Oct 2025", img: null, href: null },
